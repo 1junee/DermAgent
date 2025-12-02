@@ -1,0 +1,21 @@
+[
+  {
+    "sample_idx": 0,
+    "filename": "pubmed/fa_03_PMC6872615_JVIM-33-2770-g004_5.jpg",
+    "ground_truth": "no definitive diagnosis",
+    "ground_truth_hierarchical": "",
+    "dermatology_agent": {
+      "prediction": null,
+      "confidence": null,
+      "ontology_path": null,
+      "metrics": {}
+    },
+    "react_agent": {
+      "prediction": "no definitive diagnosis",
+      "confidence": 0.0,
+      "ontology_path": [],
+      "reasoning_steps": 2,
+      "metrics": {}
+    }
+  }
+]

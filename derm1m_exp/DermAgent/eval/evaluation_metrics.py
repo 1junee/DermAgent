@@ -71,7 +71,15 @@ class HierarchicalEvaluator:
     
     def preprocess_labels(self, labels: List[str]) -> List[str]:
         """라벨 전처리: 유효한 라벨만 필터링하고 정규화"""
-        return self.tree.filter_valid_labels(labels)
+        # 공백/대소문자/구두점에 강건하도록 정리 후 필터링
+        cleaned = []
+        for label in labels:
+            if label is None:
+                continue
+            text = str(label).strip().rstrip(" .,:;")
+            if text:
+                cleaned.append(text)
+        return self.tree.filter_valid_labels(cleaned)
     
     # ============ 기본 메트릭 ============
     

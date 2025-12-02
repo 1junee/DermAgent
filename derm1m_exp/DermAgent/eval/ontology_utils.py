@@ -319,7 +319,20 @@ class OntologyTree:
         """유효한 라벨만 필터링하여 반환"""
         valid = []
         for label in labels:
-            canonical = self.get_canonical_name(label)
+            if label is None:
+                continue
+            cleaned = str(label).strip()
+            if not cleaned:
+                continue
+            # 흔한 구두점/공백 잡음 제거
+            cleaned = cleaned.rstrip(" .,:;")
+
+            # Special case: "no definitive diagnosis" is valid without ontology check
+            if cleaned.lower() == "no definitive diagnosis":
+                valid.append("no definitive diagnosis")
+                continue
+
+            canonical = self.get_canonical_name(cleaned)
             if canonical is not None:
                 valid.append(canonical)
         return valid

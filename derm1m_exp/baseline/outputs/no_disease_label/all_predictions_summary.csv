@@ -1,0 +1,401 @@
+source_file,filename,ground_truth_raw,predicted_raw,ground_truth_canonical,predicted_canonical,valid_gt,exact_match
+internvl3_14b_predictions.csv,youtube/nSw7XdNR0bg_frame_35881_3.jpg,vasculitis,Acne vulgaris,,Acne vulgaris,0,0
+internvl3_14b_predictions.csv,youtube/7SJ--nNILsI_frame_160_0_0.jpg,allergic contact dermatitis,Seborrheic Keratosis,Allergic contact dermatitis,Seborrheic keratosis,1,0
+internvl3_14b_predictions.csv,pubmed/19_1d_PMC6755624_10.1177_2324709619877050_fig1_2.png,eruptive xanthoma,Sebaceous Cyst,Eruptive xanthoma,,1,0
+internvl3_14b_predictions.csv,pubmed/3b_fd_PMC8024261_41467_2021_22340_Fig1_HTML_10.jpg,no definitive diagnosis,None,,,0,0
+internvl3_14b_predictions.csv,pubmed/98_a8_PMC9907656_SRT-28-357-g001_0.jpg,no definitive diagnosis,Melasma,,"Melasma, Lentigo",0,0
+internvl3_14b_predictions.csv,pubmed/00_58_PMC5621200_IDOJ-8-361-g003_3.jpg,dermatitis,Rosacea,,Rosacea,0,0
+internvl3_14b_predictions.csv,youtube/ZV3lmTHN3_w_frame_51138_2.jpg,allergic contact dermatitis,Pyoderma Gangrenosum,Allergic contact dermatitis,Pyoderma gangrenosum,1,0
+internvl3_14b_predictions.csv,"note/Klaus Wolff, Lowell Goldsmith, Stephen Katz, Barbara Gilchrest, Amy Paller, D-¨å_3_00361_17625_0.png",bloom syndrome,Rosacea,,Rosacea,0,0
+internvl3_14b_predictions.csv,youtube/jJjxGxhcjpU_frame_15202_0_0.jpg,allergic contact dermatitis,Seborrheic Keratosis,Allergic contact dermatitis,Seborrheic keratosis,1,0
+internvl3_14b_predictions.csv,youtube/qW99IuAPApU_frame_23492_2.jpg,allergic contact dermatitis,Seborrheic Keratosis,Allergic contact dermatitis,Seborrheic keratosis,1,0
+internvl3_14b_predictions.csv,youtube/SVKBH_vJ5fA_frame_60409_1.jpg,libido racemosa,Acne vulgaris,,Acne vulgaris,0,0
+internvl3_14b_predictions.csv,youtube/QGbWOPXpGqM_frame_34554_0_0.jpg,allergic contact dermatitis,Impetigo,Allergic contact dermatitis,Impetigo,1,0
+internvl3_14b_predictions.csv,public/-6844673583459020552.png,rosacea,Rosacea,Rosacea,Rosacea,1,1
+internvl3_14b_predictions.csv,IIYI/20385_2.png,hidradenitis suppurativa,Acne vulgaris,hidradenitis suppurativa,Acne vulgaris,1,0
+internvl3_14b_predictions.csv,edu/å®___§ç___part1_00311_12159.png,drug eruption,Erythema,"Drug eruption, Drug eruptions & reactions",,1,0
+internvl3_14b_predictions.csv,pubmed/78_bc_PMC8896184_IANN_A_2044511_F0010_C_2.png,onychomycosis,Onychomycosis,Onychomycosis,Onychomycosis,1,1
+internvl3_14b_predictions.csv,public/dermoscopy-00--fusc2021--0247--2d-none.png,"foot ulcer, ulcer",Diabetic Foot Ulcer,,,0,0
+internvl3_14b_predictions.csv,youtube/EHy_53RfOtU_frame_1625_0_0.jpg,abscess,Onychomycosis,Abscess,Onychomycosis,1,0
+internvl3_14b_predictions.csv,pubmed/7c_b9_PMC5707863_IDOJ_8_521_g002.png,autoimmune hemolytic anemia,Nevus,,,0,0
+internvl3_14b_predictions.csv,youtube/qn2EHDqBHk0_frame_13218_2.jpg,no definitive diagnosis,Fordyce Granules,,,0,0
+internvl3_14b_predictions.csv,pubmed/2b_db_PMC7315058_MBSEH_52_119_g001_0.png,no definitive diagnosis,Onychomycosis,,Onychomycosis,0,0
+internvl3_14b_predictions.csv,youtube/Rcom9v03f9g_frame_1238_0_0.jpg,"irritated seborrheic keratosis (from ""sk/isk"")",Not applicable,"irritated seborrheic keratosis (from ""sk/isk"")",,1,0
+internvl3_14b_predictions.csv,"note/Robert Johr, Wilhelm Stolz - Dermoscopy Criteria Review-McGraw-Hill Professional (2019)_00281_01568_0.png",no definitive diagnosis,Erythema,,,0,0
+internvl3_14b_predictions.csv,IIYI/12237_2.png,pityriasis rosea,Erythema,Pityriasis rosea,,1,0
+internvl3_14b_predictions.csv,edu/Illustrated-Manual-of-Pediatric-Dermatology-Diagno...-¹é_ OCR_00110_07579.png,cellulitis,Rosacea,Cellulitis,Rosacea,1,0
+internvl3_14b_predictions.csv,IIYI/25760_2.png,"neurodermatitis, dermatitis",Tinea Corporis,,Tinea corporis,0,0
+internvl3_14b_predictions.csv,public/ISIC_5562413.JPG,nevus,Melanocytic Nevus,,Melanocytic nevus,0,0
+internvl3_14b_predictions.csv,pubmed/d9_75_PMC7490996_gr3.png,no definitive diagnosis,Fibrosarcoma,,,0,0
+internvl3_14b_predictions.csv,edu/Sauer - Manual of Skin Diseases-¹é_ OCR_00224_11642_0.jpg,ichthyosis,Eczema,Ichthyosis,Eczema,1,0
+internvl3_14b_predictions.csv,youtube/ZhQn7oXdsZs_frame_45517_0_0.jpg,allergic contact dermatitis,Lichen Sclerosus,Allergic contact dermatitis,,1,0
+internvl3_14b_predictions.csv,youtube/DSIkGCsikYU_frame_37665_11.jpg,allergic contact dermatitis,Contact Dermatitis,Allergic contact dermatitis,Contact dermatitis,1,0
+internvl3_14b_predictions.csv,IIYI/18372_2.png,nevus,Seborrheic Keratosis,,Seborrheic keratosis,0,0
+internvl3_14b_predictions.csv,youtube/IGc9CwT3jPw_frame_14160_1.jpg,paraneoplastic pemphigus,Oral Lichen Planus,,,0,0
+internvl3_14b_predictions.csv,"note/Robert Johr, Wilhelm Stolz - Dermoscopy- An Illustrate_00348_17052_0.png",no definitive diagnosis,Melanoma,,"Malignant melanoma, melanoma",0,0
+internvl3_14b_predictions.csv,youtube/qn2EHDqBHk0_frame_13191_0.jpg,no definitive diagnosis,Basal Cell Carcinoma,,Basal cell carcinoma,0,0
+internvl3_14b_predictions.csv,youtube/J9sVNh8KUAU_frame_55281_0_0.jpg,mucormycosis,Perioral dermatitis,,perioral dermatitis,0,0
+internvl3_14b_predictions.csv,IIYI/19461_4.png,"eczema, lichen planus, nail disease",Not applicable,,,0,0
+internvl3_14b_predictions.csv,note/Sewon-Kang-Fitzpatrick_-Dermatology[2-Volume Set]-McGraw-Hil-Education(2019)-part6_00276_01143_0.png,erythrasma,Seborrheic Keratosis,,Seborrheic keratosis,0,0
+internvl3_14b_predictions.csv,youtube/p5-sNkNQHUY_frame_29037_0.jpg,allergic contact dermatitis,Rosacea,Allergic contact dermatitis,Rosacea,1,0
+internvl3_14b_predictions.csv,pubmed/71_7f_PMC4149335_cia_9_1409Fig1_1.png,cellulitis,Fordyce spots,Cellulitis,,1,0
+internvl3_14b_predictions.csv,youtube/jdaN189qAVU_frame_1394_0_0.jpg,"irritated seborrheic keratosis (from ""sk/isk"")",Diabetic Foot Ulcer,"irritated seborrheic keratosis (from ""sk/isk"")",,1,0
+internvl3_14b_predictions.csv,pubmed/bd_c1_PMC8884525_gox-10-e4001-g004_0.jpg,local infection of wound,Lupus Erythematosus,Local infection of wound,Lupus erythematosus,1,0
+internvl3_14b_predictions.csv,youtube/283tIZpT1nA_frame_4307_0.jpg,melanoma,Acne vulgaris,"Malignant melanoma, melanoma",Acne vulgaris,1,0
+internvl3_14b_predictions.csv,youtube/1OuTdRRFqd0_frame_12623_0_0.jpg,no definitive diagnosis,Seborrheic Keratosis,,Seborrheic keratosis,0,0
+internvl3_14b_predictions.csv,youtube/7RWVilxv6r8_frame_14966_0_0.jpg,lymphoma,Seborrheic Keratosis,,Seborrheic keratosis,0,0
+internvl3_14b_predictions.csv,public/lentigo-adults-42.jpg,"irritated seborrheic keratosis (from ""sk/isk"")",Pemphigus Vulgaris,"irritated seborrheic keratosis (from ""sk/isk"")",Pemphigus vulgaris,1,0
+internvl3_14b_predictions.csv,youtube/NQXKZcaxkaE_frame_35901_0_0.jpg,choroidal swelling,Herpes Simplex Virus (HSV) infection,,,0,0
+internvl3_14b_predictions.csv,IIYI/1135_3.png,cellulitis,Not applicable,Cellulitis,,1,0
+internvl3_14b_predictions.csv,youtube/Rwvw8xmMVP4_frame_8653_0_0.jpg,psoriasis,Lymphedema,Psoriasis,,1,0
+internvl3_14b_predictions.csv,public/drug-eruptions-74.jpg,drug eruption,Rosacea,"Drug eruption, Drug eruptions & reactions",Rosacea,1,0
+internvl3_14b_predictions.csv,IIYI/28145_5.png,"chronic actinic dermatitis, dermatitis",Scabies,,Scabies,0,0
+internvl3_14b_predictions.csv,"edu/Electra Nicolaidou, Clio Dessinioti, Andreas Katsambas - Hypopigmentation. 1-CRC Press (2019)_00173_00668.png",xeroderma pigmentosum,Seborrheic Keratosis,Xeroderma pigmentosum,Seborrheic keratosis,1,0
+internvl3_14b_predictions.csv,IIYI/5381_1.png,"contact dermatitis, drug eruption, dermatitis",Psoriasis,,Psoriasis,0,0
+internvl3_14b_predictions.csv,youtube/Pi20y_f-dfY_frame_49685_0_0.jpg,allergic contact dermatitis,Sebaceous Cyst,Allergic contact dermatitis,,1,0
+internvl3_14b_predictions.csv,youtube/3Dx-63EZR24_frame_27589_0_0.jpg,no definitive diagnosis,Scabies,,Scabies,0,0
+internvl3_14b_predictions.csv,youtube/Lng9V5iMGJQ_frame_8835_0_0.jpg,allergic contact dermatitis,Conjunctivitis,Allergic contact dermatitis,,1,0
+internvl3_14b_predictions.csv,pubmed/64_38_PMC8088159_IDOJ_12_312_g002_0.png,"irritated seborrheic keratosis (from ""sk/isk"")",Rosacea,"irritated seborrheic keratosis (from ""sk/isk"")",Rosacea,1,0
+internvl3_14b_predictions.csv,public/herpes-type-1-recurrent-3.jpg,molluscum contagiosum,Chronic actinic cheilitis,Molluscum contagiosum,,1,0
+internvl3_14b_predictions.csv,youtube/xEYjjpXikwc_frame_3712_0_0.jpg,"irritated seborrheic keratosis (from ""sk/isk"")",Seborrheic Keratosis,"irritated seborrheic keratosis (from ""sk/isk"")",Seborrheic keratosis,1,0
+internvl3_14b_predictions.csv,IIYI/12557_4.png,measles,Urticaria (Hives),,,0,0
+internvl3_14b_predictions.csv,pubmed/fc_11_PMC10884590_Vetworld-17-150-g001_0.jpg,no definitive diagnosis,Seborrheic Keratosis,,Seborrheic keratosis,0,0
+internvl3_14b_predictions.csv,youtube/R9Drgo1xMqg_frame_8972_0_0.jpg,allergic contact dermatitis,Cellulitis,Allergic contact dermatitis,Cellulitis,1,0
+internvl3_14b_predictions.csv,youtube/iFnBzD19FrE_frame_64737_0.jpg,proliferations,Not applicable,proliferations,,1,0
+internvl3_14b_predictions.csv,pubmed/15_03_PMC10327660_dr-15-2-9617-g001_0.jpg,drug eruption,Seborrheic Keratosis,"Drug eruption, Drug eruptions & reactions",Seborrheic keratosis,1,0
+internvl3_14b_predictions.csv,youtube/ZO_3RM9qssE_frame_26250_1.jpg,exophytic papillary growth,Erythema,,,0,0
+internvl3_14b_predictions.csv,edu/Amanda Oakley - Dermatology Made Easy-SCION PUBLISHING (2017)-OCR1_00475_17075.png,"eczema, discoid eczema",Psoriasis,,Psoriasis,0,0
+internvl3_14b_predictions.csv,youtube/Vrk7360xziM_frame_6521_0.jpg,allergic contact dermatitis,Seborrheic Keratosis,Allergic contact dermatitis,Seborrheic keratosis,1,0
+internvl3_14b_predictions.csv,youtube/OT0JmxCglI4_frame_178469_2.jpg,no definitive diagnosis,Pyogenic Granuloma,,Pyogenic granuloma,0,0
+internvl3_14b_predictions.csv,pubmed/8b_be_PMC10195979_gr4a.png,no definitive diagnosis,Keloid,,Keloid,0,0
+internvl3_14b_predictions.csv,youtube/GamzNQ1mnRE_frame_809_0_0.jpg,pyogenic granuloma,Seborrheic Keratosis,Pyogenic granuloma,Seborrheic keratosis,1,0
+internvl3_14b_predictions.csv,pubmed/f3_be_PMC10868120_12903_2024_3998_Fig1_HTML.png,no definitive diagnosis,Oral Thrush,,,0,0
+internvl3_14b_predictions.csv,public/dermoscopy-00--isic2017-task1--ISIC-0010185--2d-none.png,"melanocytic nevus, nevus",Seborrheic Keratosis,,Seborrheic keratosis,0,0
+internvl3_14b_predictions.csv,pubmed/18_db_PMC3956789_ad-26-139-g001_2.jpg,striae,Scarring,Striae,,1,0
+internvl3_14b_predictions.csv,youtube/N6AUh84mRrI_frame_73721_2.jpg,no definitive diagnosis,Herpes Simplex,,,0,0
+internvl3_14b_predictions.csv,pubmed/e5_f4_PMC8355434_RCR2_9_e0827_g006_2.png,vasculitis,Plantar warts,,,0,0
+internvl3_14b_predictions.csv,youtube/BC-OLAoqCk4_frame_10492_0_0.jpg,"irritated seborrheic keratosis (from ""sk/isk"")",Rosacea,"irritated seborrheic keratosis (from ""sk/isk"")",Rosacea,1,0
+internvl3_14b_predictions.csv,youtube/Xm46eaDAQ9c_frame_328_0_0.jpg,allergic contact dermatitis,Bedbug bite,Allergic contact dermatitis,,1,0
+internvl3_14b_predictions.csv,youtube/7kHm0OypXeI_frame_13724_2.jpg,acral dermatitis,Erythema,,,0,0
+internvl3_14b_predictions.csv,edu/Aimilios Lallas- Zoe Apalla- Elizabeth Lazaridou- Dimitrios Ioannides - Dermatoscopy A-Z-CRC Press (2019)_00025_00174.png,basal cell carcinoma,Seborrheic Keratosis,Basal cell carcinoma,Seborrheic keratosis,1,0
+internvl3_14b_predictions.csv,"note/Robert Johr, Wilhelm Stolz - Dermoscopy Criteria Review-McGraw-Hill Professional (2019)_00269_01464_0.png",no definitive diagnosis,Rosacea,,Rosacea,0,0
+internvl3_14b_predictions.csv,youtube/cxnwhiVwGbg_frame_9310_0.jpg,non-melanocytic lesions,Acne vulgaris,,Acne vulgaris,0,0
+internvl3_14b_predictions.csv,public/dermoscopy-00--isic2016-task1--ISIC-0000065--2d-none.png,melanoma,Seborrheic Keratosis,"Malignant melanoma, melanoma",Seborrheic keratosis,1,0
+internvl3_14b_predictions.csv,IIYI/16689_1.png,cutaneous sporotrichosis,Pyoderma gangrenosum,,Pyoderma gangrenosum,0,0
+internvl3_14b_predictions.csv,youtube/1O4E-aTIIiY_frame_8576_6.jpg,squamous cell carcinoma,Chloasma (Melasma),Squamous cell carcinoma,,1,0
+internvl3_14b_predictions.csv,IIYI/23009_1.png,actinic solar damage(solar purpura),Bruise,Actinic solar damage(solar purpura),,1,0
+internvl3_14b_predictions.csv,pubmed/c0_95_PMC8567499_WJCC_9_9228_g004_0.png,no definitive diagnosis,Erythema,,,0,0
+internvl3_14b_predictions.csv,youtube/Sv7YGWDfkQo_frame_9321_0_0.jpg,contact dermatitis,Melanoma,Contact dermatitis,"Malignant melanoma, melanoma",1,0
+internvl3_14b_predictions.csv,pubmed/73_ca_PMC4872913_1679-4508-eins-14-1-0025-gf01-pt_2.jpg,no definitive diagnosis,Folliculitis,,Folliculitis,0,0
+internvl3_14b_predictions.csv,pubmed/54_31_PMC3827529_IJD_58_492a_g001.png,"tinea, tinea cruris",Plantar wart,,,0,0
+internvl3_14b_predictions.csv,youtube/LuzZ5bAaWDY_frame_3863_2.jpg,squamous cell carcinoma,Vitiligo,Squamous cell carcinoma,Vitiligo,1,0
+internvl3_14b_predictions.csv,youtube/_IxzrKPJdyw_frame_5576_0.jpg,"irritated seborrheic keratosis (from ""sk/isk"")",Postoperative itching,"irritated seborrheic keratosis (from ""sk/isk"")",,1,0
+internvl3_14b_predictions.csv,youtube/KtE0xQG2ceI_frame_6866_6.jpg,allergic contact dermatitis,Acne vulgaris,Allergic contact dermatitis,Acne vulgaris,1,0
+internvl3_14b_predictions.csv,youtube/ypkfPgxNFms_frame_14666_1.jpg,no definitive diagnosis,Acne vulgaris,,Acne vulgaris,0,0
+internvl3_14b_predictions.csv,"edu/Dr. Anthony J. Mancini MD  FAAP  FAAD (editor), Dr. Daniel P. Krowchuk MD  FAAP (editor) - Pediatric Dermatology- A Quick Reference Guide-American Academy of Pediatrics (2020)_00381_11401.png",dermatitis,Milia neomatura,,,0,0
+internvl3_14b_predictions.csv,"edu/Habif, Thomas P. - Clinical Dermatology (5th ed.)  -Elsevier Health Sciences-¨å_2_00017_04888.png",cradle cap,Psoriasis,,Psoriasis,0,0
+internvl3_14b_predictions.csv,youtube/ZfpA_Vc0f60_frame_59_0_0.jpg,contact dermatitis,Actinic Keratosis,Contact dermatitis,"Actinic solar damage(actinic keratosis), Actinic keratosis",1,0
+internvl3_14b_predictions.csv,youtube/wFwNjR0Rogc_frame_132227_0.jpg,no definitive diagnosis,Rosacea,,Rosacea,0,0
+internvl3_14b_predictions.csv,youtube/fmL_3Mt08GQ_frame_13703_0.jpg,cutaneous t-cell lymphoma (mf),Seborrheic Keratosis,,Seborrheic keratosis,0,0
+internvl3_14b_predictions.csv,"note/Klaus Wolff, Lowell Goldsmith, Stephen Katz, Barbara Gilchrest, Amy Paller, D-¨å_5_00345_16576_1.png",no definitive diagnosis,Rosacea,,Rosacea,0,0
+internvl3_14b_predictions.csv,pubmed/6b_ac_PMC5808376_dp0801a14g003_2.png,"lentigo, lentigo maligna",Rosacea,,Rosacea,0,0
+internvl3_8b_predictions.csv,youtube/nSw7XdNR0bg_frame_35881_3.jpg,vasculitis,Erythema,,,0,0
+internvl3_8b_predictions.csv,youtube/7SJ--nNILsI_frame_160_0_0.jpg,allergic contact dermatitis,Erythema multiforme,Allergic contact dermatitis,Erythema multiforme,1,0
+internvl3_8b_predictions.csv,pubmed/19_1d_PMC6755624_10.1177_2324709619877050_fig1_2.png,eruptive xanthoma,Lipoma,Eruptive xanthoma,Lipoma,1,0
+internvl3_8b_predictions.csv,pubmed/3b_fd_PMC8024261_41467_2021_22340_Fig1_HTML_10.jpg,no definitive diagnosis,None,,,0,0
+internvl3_8b_predictions.csv,pubmed/98_a8_PMC9907656_SRT-28-357-g001_0.jpg,no definitive diagnosis,Melasma,,"Melasma, Lentigo",0,0
+internvl3_8b_predictions.csv,pubmed/00_58_PMC5621200_IDOJ-8-361-g003_3.jpg,dermatitis,Rosacea,,Rosacea,0,0
+internvl3_8b_predictions.csv,youtube/ZV3lmTHN3_w_frame_51138_2.jpg,allergic contact dermatitis,Nodule with possible ulceration,Allergic contact dermatitis,,1,0
+internvl3_8b_predictions.csv,"note/Klaus Wolff, Lowell Goldsmith, Stephen Katz, Barbara Gilchrest, Amy Paller, D-¨å_3_00361_17625_0.png",bloom syndrome,Rosacea,,Rosacea,0,0
+internvl3_8b_predictions.csv,youtube/jJjxGxhcjpU_frame_15202_0_0.jpg,allergic contact dermatitis,Seborrheic Keratosis,Allergic contact dermatitis,Seborrheic keratosis,1,0
+internvl3_8b_predictions.csv,youtube/qW99IuAPApU_frame_23492_2.jpg,allergic contact dermatitis,Seborrheicic dermatitis,Allergic contact dermatitis,,1,0
+internvl3_8b_predictions.csv,youtube/SVKBH_vJ5fA_frame_60409_1.jpg,libido racemosa,Erythema,,,0,0
+internvl3_8b_predictions.csv,youtube/QGbWOPXpGqM_frame_34554_0_0.jpg,allergic contact dermatitis,Erythema Multiforme,Allergic contact dermatitis,Erythema multiforme,1,0
+internvl3_8b_predictions.csv,public/-6844673583459020552.png,rosacea,Rosacea,Rosacea,Rosacea,1,1
+internvl3_8b_predictions.csv,IIYI/20385_2.png,hidradenitis suppurativa,Acne,hidradenitis suppurativa,,1,0
+internvl3_8b_predictions.csv,edu/å®___§ç___part1_00311_12159.png,drug eruption,Erythema nodosum,"Drug eruption, Drug eruptions & reactions",Erythema nodosum,1,0
+internvl3_8b_predictions.csv,pubmed/78_bc_PMC8896184_IANN_A_2044511_F0010_C_2.png,onychomycosis,Onychomycosis,Onychomycosis,Onychomycosis,1,1
+internvl3_8b_predictions.csv,public/dermoscopy-00--fusc2021--0247--2d-none.png,"foot ulcer, ulcer",Foot Ulcer,,Foot ulcer,0,0
+internvl3_8b_predictions.csv,youtube/EHy_53RfOtU_frame_1625_0_0.jpg,abscess,Onychomycosis,Abscess,Onychomycosis,1,0
+internvl3_8b_predictions.csv,pubmed/7c_b9_PMC5707863_IDOJ_8_521_g002.png,autoimmune hemolytic anemia,Melanoma,,"Malignant melanoma, melanoma",0,0
+internvl3_8b_predictions.csv,youtube/qn2EHDqBHk0_frame_13218_2.jpg,no definitive diagnosis,Blepharitis,,,0,0
+internvl3_8b_predictions.csv,pubmed/2b_db_PMC7315058_MBSEH_52_119_g001_0.png,no definitive diagnosis,Erythema multiforme,,Erythema multiforme,0,0
+internvl3_8b_predictions.csv,youtube/Rcom9v03f9g_frame_1238_0_0.jpg,"irritated seborrheic keratosis (from ""sk/isk"")",None,"irritated seborrheic keratosis (from ""sk/isk"")",,1,0
+internvl3_8b_predictions.csv,"note/Robert Johr, Wilhelm Stolz - Dermoscopy Criteria Review-McGraw-Hill Professional (2019)_00281_01568_0.png",no definitive diagnosis,Erythema,,,0,0
+internvl3_8b_predictions.csv,IIYI/12237_2.png,pityriasis rosea,Erythema,Pityriasis rosea,,1,0
+internvl3_8b_predictions.csv,edu/Illustrated-Manual-of-Pediatric-Dermatology-Diagno...-¹é_ OCR_00110_07579.png,cellulitis,Erythema,Cellulitis,,1,0
+internvl3_8b_predictions.csv,IIYI/25760_2.png,"neurodermatitis, dermatitis",Psoriasis,,Psoriasis,0,0
+internvl3_8b_predictions.csv,public/ISIC_5562413.JPG,nevus,Melanocytic nevus,,Melanocytic nevus,0,0
+internvl3_8b_predictions.csv,pubmed/d9_75_PMC7490996_gr3.png,no definitive diagnosis,Fournier's Gangrene,,,0,0
+internvl3_8b_predictions.csv,edu/Sauer - Manual of Skin Diseases-¹é_ OCR_00224_11642_0.jpg,ichthyosis,Erythema,Ichthyosis,,1,0
+internvl3_8b_predictions.csv,youtube/ZhQn7oXdsZs_frame_45517_0_0.jpg,allergic contact dermatitis,Erythema nodosum,Allergic contact dermatitis,Erythema nodosum,1,0
+internvl3_8b_predictions.csv,youtube/DSIkGCsikYU_frame_37665_11.jpg,allergic contact dermatitis,Eczema,Allergic contact dermatitis,Eczema,1,0
+internvl3_8b_predictions.csv,IIYI/18372_2.png,nevus,Erythema,,,0,0
+internvl3_8b_predictions.csv,youtube/IGc9CwT3jPw_frame_14160_1.jpg,paraneoplastic pemphigus,Acne,,,0,0
+internvl3_8b_predictions.csv,"note/Robert Johr, Wilhelm Stolz - Dermoscopy- An Illustrate_00348_17052_0.png",no definitive diagnosis,Seborrheicic Keratosis,,,0,0
+internvl3_8b_predictions.csv,youtube/qn2EHDqBHk0_frame_13191_0.jpg,no definitive diagnosis,Basal cell carcinoma,,Basal cell carcinoma,0,0
+internvl3_8b_predictions.csv,youtube/J9sVNh8KUAU_frame_55281_0_0.jpg,mucormycosis,Acne,,,0,0
+internvl3_8b_predictions.csv,IIYI/19461_4.png,"eczema, lichen planus, nail disease",None,,,0,0
+internvl3_8b_predictions.csv,note/Sewon-Kang-Fitzpatrick_-Dermatology[2-Volume Set]-McGraw-Hil-Education(2019)-part6_00276_01143_0.png,erythrasma,Acne,,,0,0
+internvl3_8b_predictions.csv,youtube/p5-sNkNQHUY_frame_29037_0.jpg,allergic contact dermatitis,Erythema,Allergic contact dermatitis,,1,0
+internvl3_8b_predictions.csv,pubmed/71_7f_PMC4149335_cia_9_1409Fig1_1.png,cellulitis,Plantar warts,Cellulitis,,1,0
+internvl3_8b_predictions.csv,youtube/jdaN189qAVU_frame_1394_0_0.jpg,"irritated seborrheic keratosis (from ""sk/isk"")",Foot ulcer,"irritated seborrheic keratosis (from ""sk/isk"")",Foot ulcer,1,0
+internvl3_8b_predictions.csv,pubmed/bd_c1_PMC8884525_gox-10-e4001-g004_0.jpg,local infection of wound,Fournier's Gangrene,Local infection of wound,,1,0
+internvl3_8b_predictions.csv,youtube/283tIZpT1nA_frame_4307_0.jpg,melanoma,Erythema,"Malignant melanoma, melanoma",,1,0
+internvl3_8b_predictions.csv,youtube/1OuTdRRFqd0_frame_12623_0_0.jpg,no definitive diagnosis,Seborrheic Keratosis,,Seborrheic keratosis,0,0
+internvl3_8b_predictions.csv,youtube/7RWVilxv6r8_frame_14966_0_0.jpg,lymphoma,Psoriasis,,Psoriasis,0,0
+internvl3_8b_predictions.csv,public/lentigo-adults-42.jpg,"irritated seborrheic keratosis (from ""sk/isk"")",Acne,"irritated seborrheic keratosis (from ""sk/isk"")",,1,0
+internvl3_8b_predictions.csv,youtube/NQXKZcaxkaE_frame_35901_0_0.jpg,choroidal swelling,Conjunctivitis,,,0,0
+internvl3_8b_predictions.csv,IIYI/1135_3.png,cellulitis,None,Cellulitis,,1,0
+internvl3_8b_predictions.csv,youtube/Rwvw8xmMVP4_frame_8653_0_0.jpg,psoriasis,Lichenification,Psoriasis,,1,0
+internvl3_8b_predictions.csv,public/drug-eruptions-74.jpg,drug eruption,Erythema,"Drug eruption, Drug eruptions & reactions",,1,0
+internvl3_8b_predictions.csv,IIYI/28145_5.png,"chronic actinic dermatitis, dermatitis",Eczema,,Eczema,0,0
+internvl3_8b_predictions.csv,"edu/Electra Nicolaidou, Clio Dessinioti, Andreas Katsambas - Hypopigmentation. 1-CRC Press (2019)_00173_00668.png",xeroderma pigmentosum,Melasma,Xeroderma pigmentosum,"Melasma, Lentigo",1,0
+internvl3_8b_predictions.csv,IIYI/5381_1.png,"contact dermatitis, drug eruption, dermatitis",Eczema,,Eczema,0,0
+internvl3_8b_predictions.csv,youtube/Pi20y_f-dfY_frame_49685_0_0.jpg,allergic contact dermatitis,Pilomatricoma,Allergic contact dermatitis,,1,0
+internvl3_8b_predictions.csv,youtube/3Dx-63EZR24_frame_27589_0_0.jpg,no definitive diagnosis,Acne,,,0,0
+internvl3_8b_predictions.csv,youtube/Lng9V5iMGJQ_frame_8835_0_0.jpg,allergic contact dermatitis,Rosacea,Allergic contact dermatitis,Rosacea,1,0
+internvl3_8b_predictions.csv,pubmed/64_38_PMC8088159_IDOJ_12_312_g002_0.png,"irritated seborrheic keratosis (from ""sk/isk"")",Parse error,"irritated seborrheic keratosis (from ""sk/isk"")",,1,0
+internvl3_8b_predictions.csv,public/herpes-type-1-recurrent-3.jpg,molluscum contagiosum,Rosacea,Molluscum contagiosum,Rosacea,1,0
+internvl3_8b_predictions.csv,youtube/xEYjjpXikwc_frame_3712_0_0.jpg,"irritated seborrheic keratosis (from ""sk/isk"")",Erythema,"irritated seborrheic keratosis (from ""sk/isk"")",,1,0
+internvl3_8b_predictions.csv,IIYI/12557_4.png,measles,Erythema,,,0,0
+internvl3_8b_predictions.csv,pubmed/fc_11_PMC10884590_Vetworld-17-150-g001_0.jpg,no definitive diagnosis,Melanoma,,"Malignant melanoma, melanoma",0,0
+internvl3_8b_predictions.csv,youtube/R9Drgo1xMqg_frame_8972_0_0.jpg,allergic contact dermatitis,Fournier's Gangrene,Allergic contact dermatitis,,1,0
+internvl3_8b_predictions.csv,youtube/iFnBzD19FrE_frame_64737_0.jpg,proliferations,Eczema,proliferations,Eczema,1,0
+internvl3_8b_predictions.csv,pubmed/15_03_PMC10327660_dr-15-2-9617-g001_0.jpg,drug eruption,Actinic Keratosis,"Drug eruption, Drug eruptions & reactions","Actinic solar damage(actinic keratosis), Actinic keratosis",1,0
+internvl3_8b_predictions.csv,youtube/ZO_3RM9qssE_frame_26250_1.jpg,exophytic papillary growth,Acne,,,0,0
+internvl3_8b_predictions.csv,edu/Amanda Oakley - Dermatology Made Easy-SCION PUBLISHING (2017)-OCR1_00475_17075.png,"eczema, discoid eczema",Eczema,,Eczema,0,0
+internvl3_8b_predictions.csv,youtube/Vrk7360xziM_frame_6521_0.jpg,allergic contact dermatitis,Epiderylosis bullosa,Allergic contact dermatitis,,1,0
+internvl3_8b_predictions.csv,youtube/OT0JmxCglI4_frame_178469_2.jpg,no definitive diagnosis,Erysipelas,,,0,0
+internvl3_8b_predictions.csv,pubmed/8b_be_PMC10195979_gr4a.png,no definitive diagnosis,Post-surgical wound,,,0,0
+internvl3_8b_predictions.csv,youtube/GamzNQ1mnRE_frame_809_0_0.jpg,pyogenic granuloma,Pilomatricoma,Pyogenic granuloma,,1,0
+internvl3_8b_predictions.csv,pubmed/f3_be_PMC10868120_12903_2024_3998_Fig1_HTML.png,no definitive diagnosis,Periodontitis,,,0,0
+internvl3_8b_predictions.csv,public/dermoscopy-00--isic2017-task1--ISIC-0010185--2d-none.png,"melanocytic nevus, nevus",Melanocytic nevus,,Melanocytic nevus,0,0
+internvl3_8b_predictions.csv,pubmed/18_db_PMC3956789_ad-26-139-g001_2.jpg,striae,Eczema,Striae,Eczema,1,0
+internvl3_8b_predictions.csv,youtube/N6AUh84mRrI_frame_73721_2.jpg,no definitive diagnosis,Blepharitis,,,0,0
+internvl3_8b_predictions.csv,pubmed/e5_f4_PMC8355434_RCR2_9_e0827_g006_2.png,vasculitis,Erythema nodosum,,Erythema nodosum,0,0
+internvl3_8b_predictions.csv,youtube/BC-OLAoqCk4_frame_10492_0_0.jpg,"irritated seborrheic keratosis (from ""sk/isk"")",Parse error,"irritated seborrheic keratosis (from ""sk/isk"")",,1,0
+internvl3_8b_predictions.csv,youtube/Xm46eaDAQ9c_frame_328_0_0.jpg,allergic contact dermatitis,Scabies,Allergic contact dermatitis,Scabies,1,0
+internvl3_8b_predictions.csv,youtube/7kHm0OypXeI_frame_13724_2.jpg,acral dermatitis,Erythema nodosum,,Erythema nodosum,0,0
+internvl3_8b_predictions.csv,edu/Aimilios Lallas- Zoe Apalla- Elizabeth Lazaridou- Dimitrios Ioannides - Dermatoscopy A-Z-CRC Press (2019)_00025_00174.png,basal cell carcinoma,Freckles,Basal cell carcinoma,,1,0
+internvl3_8b_predictions.csv,"note/Robert Johr, Wilhelm Stolz - Dermoscopy Criteria Review-McGraw-Hill Professional (2019)_00269_01464_0.png",no definitive diagnosis,Erythema,,,0,0
+internvl3_8b_predictions.csv,youtube/cxnwhiVwGbg_frame_9310_0.jpg,non-melanocytic lesions,Erythema multiforme,,Erythema multiforme,0,0
+internvl3_8b_predictions.csv,public/dermoscopy-00--isic2016-task1--ISIC-0000065--2d-none.png,melanoma,Melanoma,"Malignant melanoma, melanoma","Malignant melanoma, melanoma",1,1
+internvl3_8b_predictions.csv,IIYI/16689_1.png,cutaneous sporotrichosis,Psoriasis,,Psoriasis,0,0
+internvl3_8b_predictions.csv,youtube/1O4E-aTIIiY_frame_8576_6.jpg,squamous cell carcinoma,Erythema multiforme,Squamous cell carcinoma,Erythema multiforme,1,0
+internvl3_8b_predictions.csv,IIYI/23009_1.png,actinic solar damage(solar purpura),Erythema multiforme,Actinic solar damage(solar purpura),Erythema multiforme,1,0
+internvl3_8b_predictions.csv,pubmed/c0_95_PMC8567499_WJCC_9_9228_g004_0.png,no definitive diagnosis,Erythema,,,0,0
+internvl3_8b_predictions.csv,youtube/Sv7YGWDfkQo_frame_9321_0_0.jpg,contact dermatitis,Melanoma,Contact dermatitis,"Malignant melanoma, melanoma",1,0
+internvl3_8b_predictions.csv,pubmed/73_ca_PMC4872913_1679-4508-eins-14-1-0025-gf01-pt_2.jpg,no definitive diagnosis,Nodular acne,,,0,0
+internvl3_8b_predictions.csv,pubmed/54_31_PMC3827529_IJD_58_492a_g001.png,"tinea, tinea cruris",Plantar wart,,,0,0
+internvl3_8b_predictions.csv,youtube/LuzZ5bAaWDY_frame_3863_2.jpg,squamous cell carcinoma,Erythema,Squamous cell carcinoma,,1,0
+internvl3_8b_predictions.csv,youtube/_IxzrKPJdyw_frame_5576_0.jpg,"irritated seborrheic keratosis (from ""sk/isk"")",Post-liposuction skin condition,"irritated seborrheic keratosis (from ""sk/isk"")",,1,0
+internvl3_8b_predictions.csv,youtube/KtE0xQG2ceI_frame_6866_6.jpg,allergic contact dermatitis,Papular urticaria,Allergic contact dermatitis,,1,0
+internvl3_8b_predictions.csv,youtube/ypkfPgxNFms_frame_14666_1.jpg,no definitive diagnosis,Acne,,,0,0
+internvl3_8b_predictions.csv,"edu/Dr. Anthony J. Mancini MD  FAAP  FAAD (editor), Dr. Daniel P. Krowchuk MD  FAAP (editor) - Pediatric Dermatology- A Quick Reference Guide-American Academy of Pediatrics (2020)_00381_11401.png",dermatitis,Milia,,Milia,0,0
+internvl3_8b_predictions.csv,"edu/Habif, Thomas P. - Clinical Dermatology (5th ed.)  -Elsevier Health Sciences-¨å_2_00017_04888.png",cradle cap,Eczema,,Eczema,0,0
+internvl3_8b_predictions.csv,youtube/ZfpA_Vc0f60_frame_59_0_0.jpg,contact dermatitis,Rosacea,Contact dermatitis,Rosacea,1,0
+internvl3_8b_predictions.csv,youtube/wFwNjR0Rogc_frame_132227_0.jpg,no definitive diagnosis,Erythema,,,0,0
+internvl3_8b_predictions.csv,youtube/fmL_3Mt08GQ_frame_13703_0.jpg,cutaneous t-cell lymphoma (mf),Erythema,,,0,0
+internvl3_8b_predictions.csv,"note/Klaus Wolff, Lowell Goldsmith, Stephen Katz, Barbara Gilchrest, Amy Paller, D-¨å_5_00345_16576_1.png",no definitive diagnosis,Rosacea,,Rosacea,0,0
+internvl3_8b_predictions.csv,pubmed/6b_ac_PMC5808376_dp0801a14g003_2.png,"lentigo, lentigo maligna",Erythema multiforme,,Erythema multiforme,0,0
+qwen3vl32b_predictions.csv,youtube/nSw7XdNR0bg_frame_35881_3.jpg,vasculitis,Psoriasis,,Psoriasis,0,0
+qwen3vl32b_predictions.csv,youtube/7SJ--nNILsI_frame_160_0_0.jpg,allergic contact dermatitis,Seborrheic Keratosis,Allergic contact dermatitis,Seborrheic keratosis,1,0
+qwen3vl32b_predictions.csv,pubmed/19_1d_PMC6755624_10.1177_2324709619877050_fig1_2.png,eruptive xanthoma,Xanthoma,Eruptive xanthoma,,1,0
+qwen3vl32b_predictions.csv,pubmed/3b_fd_PMC8024261_41467_2021_22340_Fig1_HTML_10.jpg,no definitive diagnosis,None,,,0,0
+qwen3vl32b_predictions.csv,pubmed/98_a8_PMC9907656_SRT-28-357-g001_0.jpg,no definitive diagnosis,Acanthosis Nigricans,,Acanthosis nigricans,0,0
+qwen3vl32b_predictions.csv,pubmed/00_58_PMC5621200_IDOJ-8-361-g003_3.jpg,dermatitis,Traumatic bruising (contusion),,,0,0
+qwen3vl32b_predictions.csv,youtube/ZV3lmTHN3_w_frame_51138_2.jpg,allergic contact dermatitis,Basal Cell Carcinoma,Allergic contact dermatitis,Basal cell carcinoma,1,0
+qwen3vl32b_predictions.csv,"note/Klaus Wolff, Lowell Goldsmith, Stephen Katz, Barbara Gilchrest, Amy Paller, D-¨å_3_00361_17625_0.png",bloom syndrome,Rosacea,,Rosacea,0,0
+qwen3vl32b_predictions.csv,youtube/jJjxGxhcjpU_frame_15202_0_0.jpg,allergic contact dermatitis,Molluscum contagiosum,Allergic contact dermatitis,Molluscum contagiosum,1,0
+qwen3vl32b_predictions.csv,youtube/qW99IuAPApU_frame_23492_2.jpg,allergic contact dermatitis,Seborrheic Keratosis,Allergic contact dermatitis,Seborrheic keratosis,1,0
+qwen3vl32b_predictions.csv,youtube/SVKBH_vJ5fA_frame_60409_1.jpg,libido racemosa,Eczema (Atopic Dermatitis),,,0,0
+qwen3vl32b_predictions.csv,youtube/QGbWOPXpGqM_frame_34554_0_0.jpg,allergic contact dermatitis,Herpes Zoster (Shingles),Allergic contact dermatitis,,1,0
+qwen3vl32b_predictions.csv,public/-6844673583459020552.png,rosacea,Rosacea,Rosacea,Rosacea,1,1
+qwen3vl32b_predictions.csv,IIYI/20385_2.png,hidradenitis suppurativa,Post-inflammatory hyperpigmentation with active acne lesions,hidradenitis suppurativa,,1,0
+qwen3vl32b_predictions.csv,edu/å®___§ç___part1_00311_12159.png,drug eruption,Pityriasis rosea,"Drug eruption, Drug eruptions & reactions",Pityriasis rosea,1,0
+qwen3vl32b_predictions.csv,pubmed/78_bc_PMC8896184_IANN_A_2044511_F0010_C_2.png,onychomycosis,Subungual hematoma,Onychomycosis,,1,0
+qwen3vl32b_predictions.csv,public/dermoscopy-00--fusc2021--0247--2d-none.png,"foot ulcer, ulcer",Pyoderma gangrenosum,,Pyoderma gangrenosum,0,0
+qwen3vl32b_predictions.csv,youtube/EHy_53RfOtU_frame_1625_0_0.jpg,abscess,Paronychia,Abscess,Paronychia,1,0
+qwen3vl32b_predictions.csv,pubmed/7c_b9_PMC5707863_IDOJ_8_521_g002.png,autoimmune hemolytic anemia,Bruise (contusion),,,0,0
+qwen3vl32b_predictions.csv,youtube/qn2EHDqBHk0_frame_13218_2.jpg,no definitive diagnosis,Basal Cell Carcinoma,,Basal cell carcinoma,0,0
+qwen3vl32b_predictions.csv,pubmed/2b_db_PMC7315058_MBSEH_52_119_g001_0.png,no definitive diagnosis,Dermatofibroma,,Dermatofibroma,0,0
+qwen3vl32b_predictions.csv,youtube/Rcom9v03f9g_frame_1238_0_0.jpg,"irritated seborrheic keratosis (from ""sk/isk"")",None,"irritated seborrheic keratosis (from ""sk/isk"")",,1,0
+qwen3vl32b_predictions.csv,"note/Robert Johr, Wilhelm Stolz - Dermoscopy Criteria Review-McGraw-Hill Professional (2019)_00281_01568_0.png",no definitive diagnosis,Xerosis,,Xerosis,0,0
+qwen3vl32b_predictions.csv,IIYI/12237_2.png,pityriasis rosea,Miliaria (Heat Rash),Pityriasis rosea,,1,0
+qwen3vl32b_predictions.csv,edu/Illustrated-Manual-of-Pediatric-Dermatology-Diagno...-¹é_ OCR_00110_07579.png,cellulitis,Atopic dermatitis,Cellulitis,Atopic dermatitis,1,0
+qwen3vl32b_predictions.csv,IIYI/25760_2.png,"neurodermatitis, dermatitis",Psoriasis,,Psoriasis,0,0
+qwen3vl32b_predictions.csv,public/ISIC_5562413.JPG,nevus,Melanocytic nevus,,Melanocytic nevus,0,0
+qwen3vl32b_predictions.csv,pubmed/d9_75_PMC7490996_gr3.png,no definitive diagnosis,Cutaneous squamous cell carcinoma with ulceration and infection,,,0,0
+qwen3vl32b_predictions.csv,edu/Sauer - Manual of Skin Diseases-¹é_ OCR_00224_11642_0.jpg,ichthyosis,Psoriasis,Ichthyosis,Psoriasis,1,0
+qwen3vl32b_predictions.csv,youtube/ZhQn7oXdsZs_frame_45517_0_0.jpg,allergic contact dermatitis,Acanthosis Nigricans,Allergic contact dermatitis,Acanthosis nigricans,1,0
+qwen3vl32b_predictions.csv,youtube/DSIkGCsikYU_frame_37665_11.jpg,allergic contact dermatitis,Tinea pedis,Allergic contact dermatitis,Tinea pedis,1,0
+qwen3vl32b_predictions.csv,IIYI/18372_2.png,nevus,Melanocytic nevus (benign mole),,,0,0
+qwen3vl32b_predictions.csv,youtube/IGc9CwT3jPw_frame_14160_1.jpg,paraneoplastic pemphigus,Oral lichen planus,,,0,0
+qwen3vl32b_predictions.csv,"note/Robert Johr, Wilhelm Stolz - Dermoscopy- An Illustrate_00348_17052_0.png",no definitive diagnosis,Melanocytic nevus (common mole),,,0,0
+qwen3vl32b_predictions.csv,youtube/qn2EHDqBHk0_frame_13191_0.jpg,no definitive diagnosis,Basal Cell Carcinoma,,Basal cell carcinoma,0,0
+qwen3vl32b_predictions.csv,youtube/J9sVNh8KUAU_frame_55281_0_0.jpg,mucormycosis,Periorbital dermatitis,,,0,0
+qwen3vl32b_predictions.csv,IIYI/19461_4.png,"eczema, lichen planus, nail disease",None,,,0,0
+qwen3vl32b_predictions.csv,note/Sewon-Kang-Fitzpatrick_-Dermatology[2-Volume Set]-McGraw-Hil-Education(2019)-part6_00276_01143_0.png,erythrasma,Genital herpes,,,0,0
+qwen3vl32b_predictions.csv,youtube/p5-sNkNQHUY_frame_29037_0.jpg,allergic contact dermatitis,Basal Cell Carcinoma,Allergic contact dermatitis,Basal cell carcinoma,1,0
+qwen3vl32b_predictions.csv,pubmed/71_7f_PMC4149335_cia_9_1409Fig1_1.png,cellulitis,Oral candidiasis,Cellulitis,,1,0
+qwen3vl32b_predictions.csv,youtube/jdaN189qAVU_frame_1394_0_0.jpg,"irritated seborrheic keratosis (from ""sk/isk"")",Venous stasis ulcer,"irritated seborrheic keratosis (from ""sk/isk"")",,1,0
+qwen3vl32b_predictions.csv,pubmed/bd_c1_PMC8884525_gox-10-e4001-g004_0.jpg,local infection of wound,Open wound with debridement,Local infection of wound,,1,0
+qwen3vl32b_predictions.csv,youtube/283tIZpT1nA_frame_4307_0.jpg,melanoma,Melanoma,"Malignant melanoma, melanoma","Malignant melanoma, melanoma",1,1
+qwen3vl32b_predictions.csv,youtube/1OuTdRRFqd0_frame_12623_0_0.jpg,no definitive diagnosis,Seborrheic keratosis,,Seborrheic keratosis,0,0
+qwen3vl32b_predictions.csv,youtube/7RWVilxv6r8_frame_14966_0_0.jpg,lymphoma,Psoriasis,,Psoriasis,0,0
+qwen3vl32b_predictions.csv,public/lentigo-adults-42.jpg,"irritated seborrheic keratosis (from ""sk/isk"")",Actinic Keratosis,"irritated seborrheic keratosis (from ""sk/isk"")","Actinic solar damage(actinic keratosis), Actinic keratosis",1,0
+qwen3vl32b_predictions.csv,youtube/NQXKZcaxkaE_frame_35901_0_0.jpg,choroidal swelling,Conjunctival Melanoma,,,0,0
+qwen3vl32b_predictions.csv,IIYI/1135_3.png,cellulitis,None,Cellulitis,,1,0
+qwen3vl32b_predictions.csv,youtube/Rwvw8xmMVP4_frame_8653_0_0.jpg,psoriasis,Wound with dressing,Psoriasis,,1,0
+qwen3vl32b_predictions.csv,public/drug-eruptions-74.jpg,drug eruption,Pityriasis rosea,"Drug eruption, Drug eruptions & reactions",Pityriasis rosea,1,0
+qwen3vl32b_predictions.csv,IIYI/28145_5.png,"chronic actinic dermatitis, dermatitis",Psoriasis,,Psoriasis,0,0
+qwen3vl32b_predictions.csv,"edu/Electra Nicolaidou, Clio Dessinioti, Andreas Katsambas - Hypopigmentation. 1-CRC Press (2019)_00173_00668.png",xeroderma pigmentosum,Solar Lentigines (Liver Spots),Xeroderma pigmentosum,,1,0
+qwen3vl32b_predictions.csv,IIYI/5381_1.png,"contact dermatitis, drug eruption, dermatitis",Dyshidrotic eczema (pompholyx),,,0,0
+qwen3vl32b_predictions.csv,youtube/Pi20y_f-dfY_frame_49685_0_0.jpg,allergic contact dermatitis,Sebaceous hyperplasia,Allergic contact dermatitis,"Sebaceous gland hyperplasia, Sebaceous hyperplasia",1,0
+qwen3vl32b_predictions.csv,youtube/3Dx-63EZR24_frame_27589_0_0.jpg,no definitive diagnosis,None,,,0,0
+qwen3vl32b_predictions.csv,youtube/Lng9V5iMGJQ_frame_8835_0_0.jpg,allergic contact dermatitis,Actinic Keratosis,Allergic contact dermatitis,"Actinic solar damage(actinic keratosis), Actinic keratosis",1,0
+qwen3vl32b_predictions.csv,pubmed/64_38_PMC8088159_IDOJ_12_312_g002_0.png,"irritated seborrheic keratosis (from ""sk/isk"")",Seborrheic dermatitis,"irritated seborrheic keratosis (from ""sk/isk"")",Seborrheic dermatitis,1,0
+qwen3vl32b_predictions.csv,public/herpes-type-1-recurrent-3.jpg,molluscum contagiosum,Herpes simplex virus (HSV) infection,Molluscum contagiosum,,1,0
+qwen3vl32b_predictions.csv,youtube/xEYjjpXikwc_frame_3712_0_0.jpg,"irritated seborrheic keratosis (from ""sk/isk"")",Tinea corporis,"irritated seborrheic keratosis (from ""sk/isk"")",Tinea corporis,1,0
+qwen3vl32b_predictions.csv,IIYI/12557_4.png,measles,Pityriasis rosea,,Pityriasis rosea,0,0
+qwen3vl32b_predictions.csv,pubmed/fc_11_PMC10884590_Vetworld-17-150-g001_0.jpg,no definitive diagnosis,None,,,0,0
+qwen3vl32b_predictions.csv,youtube/R9Drgo1xMqg_frame_8972_0_0.jpg,allergic contact dermatitis,Surgical wound with sutures,Allergic contact dermatitis,,1,0
+qwen3vl32b_predictions.csv,youtube/iFnBzD19FrE_frame_64737_0.jpg,proliferations,None,proliferations,,1,0
+qwen3vl32b_predictions.csv,pubmed/15_03_PMC10327660_dr-15-2-9617-g001_0.jpg,drug eruption,Lichen Sclerosus,"Drug eruption, Drug eruptions & reactions",,1,0
+qwen3vl32b_predictions.csv,youtube/ZO_3RM9qssE_frame_26250_1.jpg,exophytic papillary growth,Gingivitis,,,0,0
+qwen3vl32b_predictions.csv,edu/Amanda Oakley - Dermatology Made Easy-SCION PUBLISHING (2017)-OCR1_00475_17075.png,"eczema, discoid eczema",Psoriasis,,Psoriasis,0,0
+qwen3vl32b_predictions.csv,youtube/Vrk7360xziM_frame_6521_0.jpg,allergic contact dermatitis,Actinic keratosis,Allergic contact dermatitis,"Actinic solar damage(actinic keratosis), Actinic keratosis",1,0
+qwen3vl32b_predictions.csv,youtube/OT0JmxCglI4_frame_178469_2.jpg,no definitive diagnosis,Wound exudate,,,0,0
+qwen3vl32b_predictions.csv,pubmed/8b_be_PMC10195979_gr4a.png,no definitive diagnosis,Post-surgical incisions with active bleeding,,,0,0
+qwen3vl32b_predictions.csv,youtube/GamzNQ1mnRE_frame_809_0_0.jpg,pyogenic granuloma,Pyogenic granuloma,Pyogenic granuloma,Pyogenic granuloma,1,1
+qwen3vl32b_predictions.csv,pubmed/f3_be_PMC10868120_12903_2024_3998_Fig1_HTML.png,no definitive diagnosis,Oral mucosal pigmentation,,,0,0
+qwen3vl32b_predictions.csv,public/dermoscopy-00--isic2017-task1--ISIC-0010185--2d-none.png,"melanocytic nevus, nevus",Melanocytic nevus,,Melanocytic nevus,0,0
+qwen3vl32b_predictions.csv,pubmed/18_db_PMC3956789_ad-26-139-g001_2.jpg,striae,Linear IgA Bullous Dermatosis,Striae,,1,0
+qwen3vl32b_predictions.csv,youtube/N6AUh84mRrI_frame_73721_2.jpg,no definitive diagnosis,Basal cell carcinoma,,Basal cell carcinoma,0,0
+qwen3vl32b_predictions.csv,pubmed/e5_f4_PMC8355434_RCR2_9_e0827_g006_2.png,vasculitis,Gouty tophus,,,0,0
+qwen3vl32b_predictions.csv,youtube/BC-OLAoqCk4_frame_10492_0_0.jpg,"irritated seborrheic keratosis (from ""sk/isk"")",None,"irritated seborrheic keratosis (from ""sk/isk"")",,1,0
+qwen3vl32b_predictions.csv,youtube/Xm46eaDAQ9c_frame_328_0_0.jpg,allergic contact dermatitis,Scabies,Allergic contact dermatitis,Scabies,1,0
+qwen3vl32b_predictions.csv,youtube/7kHm0OypXeI_frame_13724_2.jpg,acral dermatitis,Lichen planus,,Lichen planus,0,0
+qwen3vl32b_predictions.csv,edu/Aimilios Lallas- Zoe Apalla- Elizabeth Lazaridou- Dimitrios Ioannides - Dermatoscopy A-Z-CRC Press (2019)_00025_00174.png,basal cell carcinoma,Seborrheic Keratosis,Basal cell carcinoma,Seborrheic keratosis,1,0
+qwen3vl32b_predictions.csv,"note/Robert Johr, Wilhelm Stolz - Dermoscopy Criteria Review-McGraw-Hill Professional (2019)_00269_01464_0.png",no definitive diagnosis,Actinic Keratosis,,"Actinic solar damage(actinic keratosis), Actinic keratosis",0,0
+qwen3vl32b_predictions.csv,youtube/cxnwhiVwGbg_frame_9310_0.jpg,non-melanocytic lesions,Actinic Keratosis,,"Actinic solar damage(actinic keratosis), Actinic keratosis",0,0
+qwen3vl32b_predictions.csv,public/dermoscopy-00--isic2016-task1--ISIC-0000065--2d-none.png,melanoma,Melanocytic nevus (common mole),"Malignant melanoma, melanoma",,1,0
+qwen3vl32b_predictions.csv,IIYI/16689_1.png,cutaneous sporotrichosis,Basal Cell Carcinoma,,Basal cell carcinoma,0,0
+qwen3vl32b_predictions.csv,youtube/1O4E-aTIIiY_frame_8576_6.jpg,squamous cell carcinoma,Basal Cell Carcinoma,Squamous cell carcinoma,Basal cell carcinoma,1,0
+qwen3vl32b_predictions.csv,IIYI/23009_1.png,actinic solar damage(solar purpura),Ecchymosis (bruising),Actinic solar damage(solar purpura),,1,0
+qwen3vl32b_predictions.csv,pubmed/c0_95_PMC8567499_WJCC_9_9228_g004_0.png,no definitive diagnosis,None,,,0,0
+qwen3vl32b_predictions.csv,youtube/Sv7YGWDfkQo_frame_9321_0_0.jpg,contact dermatitis,Melanoma,Contact dermatitis,"Malignant melanoma, melanoma",1,0
+qwen3vl32b_predictions.csv,pubmed/73_ca_PMC4872913_1679-4508-eins-14-1-0025-gf01-pt_2.jpg,no definitive diagnosis,Oral squamous cell carcinoma,,,0,0
+qwen3vl32b_predictions.csv,pubmed/54_31_PMC3827529_IJD_58_492a_g001.png,"tinea, tinea cruris",Penile psoriasis,,,0,0
+qwen3vl32b_predictions.csv,youtube/LuzZ5bAaWDY_frame_3863_2.jpg,squamous cell carcinoma,Unknown,Squamous cell carcinoma,,1,0
+qwen3vl32b_predictions.csv,youtube/_IxzrKPJdyw_frame_5576_0.jpg,"irritated seborrheic keratosis (from ""sk/isk"")",Post-liposuction pruritus,"irritated seborrheic keratosis (from ""sk/isk"")",,1,0
+qwen3vl32b_predictions.csv,youtube/KtE0xQG2ceI_frame_6866_6.jpg,allergic contact dermatitis,Molluscum contagiosum,Allergic contact dermatitis,Molluscum contagiosum,1,0
+qwen3vl32b_predictions.csv,youtube/ypkfPgxNFms_frame_14666_1.jpg,no definitive diagnosis,Acne,,,0,0
+qwen3vl32b_predictions.csv,"edu/Dr. Anthony J. Mancini MD  FAAP  FAAD (editor), Dr. Daniel P. Krowchuk MD  FAAP (editor) - Pediatric Dermatology- A Quick Reference Guide-American Academy of Pediatrics (2020)_00381_11401.png",dermatitis,Cradle cap (seborrheic dermatitis),,,0,0
+qwen3vl32b_predictions.csv,"edu/Habif, Thomas P. - Clinical Dermatology (5th ed.)  -Elsevier Health Sciences-¨å_2_00017_04888.png",cradle cap,Palmar hyperkeratosis,,,0,0
+qwen3vl32b_predictions.csv,youtube/ZfpA_Vc0f60_frame_59_0_0.jpg,contact dermatitis,Melanosis of the vermilion border,Contact dermatitis,,1,0
+qwen3vl32b_predictions.csv,youtube/wFwNjR0Rogc_frame_132227_0.jpg,no definitive diagnosis,Rosacea,,Rosacea,0,0
+qwen3vl32b_predictions.csv,youtube/fmL_3Mt08GQ_frame_13703_0.jpg,cutaneous t-cell lymphoma (mf),Erythema,,,0,0
+qwen3vl32b_predictions.csv,"note/Klaus Wolff, Lowell Goldsmith, Stephen Katz, Barbara Gilchrest, Amy Paller, D-¨å_5_00345_16576_1.png",no definitive diagnosis,Rosacea,,Rosacea,0,0
+qwen3vl32b_predictions.csv,pubmed/6b_ac_PMC5808376_dp0801a14g003_2.png,"lentigo, lentigo maligna",Basal Cell Carcinoma,,Basal cell carcinoma,0,0
+qwen3vl_8b_predictions.csv,youtube/nSw7XdNR0bg_frame_35881_3.jpg,vasculitis,Erythema,,,0,0
+qwen3vl_8b_predictions.csv,youtube/7SJ--nNILsI_frame_160_0_0.jpg,allergic contact dermatitis,Moles,Allergic contact dermatitis,,1,0
+qwen3vl_8b_predictions.csv,pubmed/19_1d_PMC6755624_10.1177_2324709619877050_fig1_2.png,eruptive xanthoma,Normal skin,Eruptive xanthoma,,1,0
+qwen3vl_8b_predictions.csv,pubmed/3b_fd_PMC8024261_41467_2021_22340_Fig1_HTML_10.jpg,no definitive diagnosis,None,,,0,0
+qwen3vl_8b_predictions.csv,pubmed/98_a8_PMC9907656_SRT-28-357-g001_0.jpg,no definitive diagnosis,Striae distensae,,,0,0
+qwen3vl_8b_predictions.csv,pubmed/00_58_PMC5621200_IDOJ-8-361-g003_3.jpg,dermatitis,Traumatic bruise,,,0,0
+qwen3vl_8b_predictions.csv,youtube/ZV3lmTHN3_w_frame_51138_2.jpg,allergic contact dermatitis,Open wound,Allergic contact dermatitis,,1,0
+qwen3vl_8b_predictions.csv,"note/Klaus Wolff, Lowell Goldsmith, Stephen Katz, Barbara Gilchrest, Amy Paller, D-¨å_3_00361_17625_0.png",bloom syndrome,Rosacea,,Rosacea,0,0
+qwen3vl_8b_predictions.csv,youtube/jJjxGxhcjpU_frame_15202_0_0.jpg,allergic contact dermatitis,Molluscum contagiosum,Allergic contact dermatitis,Molluscum contagiosum,1,0
+qwen3vl_8b_predictions.csv,youtube/qW99IuAPApU_frame_23492_2.jpg,allergic contact dermatitis,Molluscum contagiosum,Allergic contact dermatitis,Molluscum contagiosum,1,0
+qwen3vl_8b_predictions.csv,youtube/SVKBH_vJ5fA_frame_60409_1.jpg,libido racemosa,urticaria,,Urticaria,0,0
+qwen3vl_8b_predictions.csv,youtube/QGbWOPXpGqM_frame_34554_0_0.jpg,allergic contact dermatitis,Contact Dermatitis,Allergic contact dermatitis,Contact dermatitis,1,0
+qwen3vl_8b_predictions.csv,public/-6844673583459020552.png,rosacea,Contact Dermatitis,Rosacea,Contact dermatitis,1,0
+qwen3vl_8b_predictions.csv,IIYI/20385_2.png,hidradenitis suppurativa,Pityriasis rosea,hidradenitis suppurativa,Pityriasis rosea,1,0
+qwen3vl_8b_predictions.csv,edu/å®___§ç___part1_00311_12159.png,drug eruption,Erythema,"Drug eruption, Drug eruptions & reactions",,1,0
+qwen3vl_8b_predictions.csv,pubmed/78_bc_PMC8896184_IANN_A_2044511_F0010_C_2.png,onychomycosis,Onychomycosis,Onychomycosis,Onychomycosis,1,1
+qwen3vl_8b_predictions.csv,public/dermoscopy-00--fusc2021--0247--2d-none.png,"foot ulcer, ulcer",Infected wound,,,0,0
+qwen3vl_8b_predictions.csv,youtube/EHy_53RfOtU_frame_1625_0_0.jpg,abscess,Paronychia,Abscess,Paronychia,1,0
+qwen3vl_8b_predictions.csv,pubmed/7c_b9_PMC5707863_IDOJ_8_521_g002.png,autoimmune hemolytic anemia,Hematoma,,,0,0
+qwen3vl_8b_predictions.csv,youtube/qn2EHDqBHk0_frame_13218_2.jpg,no definitive diagnosis,Chronic blepharitis,,,0,0
+qwen3vl_8b_predictions.csv,pubmed/2b_db_PMC7315058_MBSEH_52_119_g001_0.png,no definitive diagnosis,Skin lesion,,,0,0
+qwen3vl_8b_predictions.csv,youtube/Rcom9v03f9g_frame_1238_0_0.jpg,"irritated seborrheic keratosis (from ""sk/isk"")",None,"irritated seborrheic keratosis (from ""sk/isk"")",,1,0
+qwen3vl_8b_predictions.csv,"note/Robert Johr, Wilhelm Stolz - Dermoscopy Criteria Review-McGraw-Hill Professional (2019)_00281_01568_0.png",no definitive diagnosis,Xerosis,,Xerosis,0,0
+qwen3vl_8b_predictions.csv,IIYI/12237_2.png,pityriasis rosea,Viral exanthem,Pityriasis rosea,Viral exanthem,1,0
+qwen3vl_8b_predictions.csv,edu/Illustrated-Manual-of-Pediatric-Dermatology-Diagno...-¹é_ OCR_00110_07579.png,cellulitis,Erythema,Cellulitis,,1,0
+qwen3vl_8b_predictions.csv,IIYI/25760_2.png,"neurodermatitis, dermatitis",Contact Dermatitis,,Contact dermatitis,0,0
+qwen3vl_8b_predictions.csv,public/ISIC_5562413.JPG,nevus,Melanocytic nevus,,Melanocytic nevus,0,0
+qwen3vl_8b_predictions.csv,pubmed/d9_75_PMC7490996_gr3.png,no definitive diagnosis,Malignant melanoma,,"Malignant melanoma, melanoma",0,0
+qwen3vl_8b_predictions.csv,edu/Sauer - Manual of Skin Diseases-¹é_ OCR_00224_11642_0.jpg,ichthyosis,Contact dermatitis,Ichthyosis,Contact dermatitis,1,0
+qwen3vl_8b_predictions.csv,youtube/ZhQn7oXdsZs_frame_45517_0_0.jpg,allergic contact dermatitis,Tinea cruris,Allergic contact dermatitis,Tinea cruris,1,0
+qwen3vl_8b_predictions.csv,youtube/DSIkGCsikYU_frame_37665_11.jpg,allergic contact dermatitis,Unknown,Allergic contact dermatitis,,1,0
+qwen3vl_8b_predictions.csv,IIYI/18372_2.png,nevus,Melasma,,"Melasma, Lentigo",0,0
+qwen3vl_8b_predictions.csv,youtube/IGc9CwT3jPw_frame_14160_1.jpg,paraneoplastic pemphigus,Oral candidiasis,,,0,0
+qwen3vl_8b_predictions.csv,"note/Robert Johr, Wilhelm Stolz - Dermoscopy- An Illustrate_00348_17052_0.png",no definitive diagnosis,Mole,,,0,0
+qwen3vl_8b_predictions.csv,youtube/qn2EHDqBHk0_frame_13191_0.jpg,no definitive diagnosis,Nasal pyogenic granuloma,,,0,0
+qwen3vl_8b_predictions.csv,youtube/J9sVNh8KUAU_frame_55281_0_0.jpg,mucormycosis,Contact dermatitis,,Contact dermatitis,0,0
+qwen3vl_8b_predictions.csv,IIYI/19461_4.png,"eczema, lichen planus, nail disease",,,,0,0
+qwen3vl_8b_predictions.csv,note/Sewon-Kang-Fitzpatrick_-Dermatology[2-Volume Set]-McGraw-Hil-Education(2019)-part6_00276_01143_0.png,erythrasma,Genital warts,,,0,0
+qwen3vl_8b_predictions.csv,youtube/p5-sNkNQHUY_frame_29037_0.jpg,allergic contact dermatitis,Erythema,Allergic contact dermatitis,,1,0
+qwen3vl_8b_predictions.csv,pubmed/71_7f_PMC4149335_cia_9_1409Fig1_1.png,cellulitis,Oral candidiasis,Cellulitis,,1,0
+qwen3vl_8b_predictions.csv,youtube/jdaN189qAVU_frame_1394_0_0.jpg,"irritated seborrheic keratosis (from ""sk/isk"")",Open wound,"irritated seborrheic keratosis (from ""sk/isk"")",,1,0
+qwen3vl_8b_predictions.csv,pubmed/bd_c1_PMC8884525_gox-10-e4001-g004_0.jpg,local infection of wound,Wound,Local infection of wound,,1,0
+qwen3vl_8b_predictions.csv,youtube/283tIZpT1nA_frame_4307_0.jpg,melanoma,Periungual Melanosis,"Malignant melanoma, melanoma",,1,0
+qwen3vl_8b_predictions.csv,youtube/1OuTdRRFqd0_frame_12623_0_0.jpg,no definitive diagnosis,Mole,,,0,0
+qwen3vl_8b_predictions.csv,youtube/7RWVilxv6r8_frame_14966_0_0.jpg,lymphoma,Pityriasis rosea,,Pityriasis rosea,0,0
+qwen3vl_8b_predictions.csv,public/lentigo-adults-42.jpg,"irritated seborrheic keratosis (from ""sk/isk"")",Erythema,"irritated seborrheic keratosis (from ""sk/isk"")",,1,0
+qwen3vl_8b_predictions.csv,youtube/NQXKZcaxkaE_frame_35901_0_0.jpg,choroidal swelling,Ectropion,,,0,0
+qwen3vl_8b_predictions.csv,IIYI/1135_3.png,cellulitis,Unknown,Cellulitis,,1,0
+qwen3vl_8b_predictions.csv,youtube/Rwvw8xmMVP4_frame_8653_0_0.jpg,psoriasis,Not applicable,Psoriasis,,1,0
+qwen3vl_8b_predictions.csv,public/drug-eruptions-74.jpg,drug eruption,Lichen planus,"Drug eruption, Drug eruptions & reactions",Lichen planus,1,0
+qwen3vl_8b_predictions.csv,IIYI/28145_5.png,"chronic actinic dermatitis, dermatitis",Eczema,,Eczema,0,0
+qwen3vl_8b_predictions.csv,"edu/Electra Nicolaidou, Clio Dessinioti, Andreas Katsambas - Hypopigmentation. 1-CRC Press (2019)_00173_00668.png",xeroderma pigmentosum,Solar lentigines,Xeroderma pigmentosum,,1,0
+qwen3vl_8b_predictions.csv,IIYI/5381_1.png,"contact dermatitis, drug eruption, dermatitis",Contact Dermatitis,,Contact dermatitis,0,0
+qwen3vl_8b_predictions.csv,youtube/Pi20y_f-dfY_frame_49685_0_0.jpg,allergic contact dermatitis,Surgical excision site,Allergic contact dermatitis,,1,0
+qwen3vl_8b_predictions.csv,youtube/3Dx-63EZR24_frame_27589_0_0.jpg,no definitive diagnosis,Unknown,,,0,0
+qwen3vl_8b_predictions.csv,youtube/Lng9V5iMGJQ_frame_8835_0_0.jpg,allergic contact dermatitis,Allergic Conjunctivitis,Allergic contact dermatitis,,1,0
+qwen3vl_8b_predictions.csv,pubmed/64_38_PMC8088159_IDOJ_12_312_g002_0.png,"irritated seborrheic keratosis (from ""sk/isk"")",Acne,"irritated seborrheic keratosis (from ""sk/isk"")",,1,0
+qwen3vl_8b_predictions.csv,public/herpes-type-1-recurrent-3.jpg,molluscum contagiosum,Perioral dermatitis,Molluscum contagiosum,perioral dermatitis,1,0
+qwen3vl_8b_predictions.csv,youtube/xEYjjpXikwc_frame_3712_0_0.jpg,"irritated seborrheic keratosis (from ""sk/isk"")",Pityriasis rosea,"irritated seborrheic keratosis (from ""sk/isk"")",Pityriasis rosea,1,0
+qwen3vl_8b_predictions.csv,IIYI/12557_4.png,measles,Hives,,,0,0
+qwen3vl_8b_predictions.csv,pubmed/fc_11_PMC10884590_Vetworld-17-150-g001_0.jpg,no definitive diagnosis,None,,,0,0
+qwen3vl_8b_predictions.csv,youtube/R9Drgo1xMqg_frame_8972_0_0.jpg,allergic contact dermatitis,Surgical incision,Allergic contact dermatitis,,1,0
+qwen3vl_8b_predictions.csv,youtube/iFnBzD19FrE_frame_64737_0.jpg,proliferations,No skin disease detected,proliferations,,1,0
+qwen3vl_8b_predictions.csv,pubmed/15_03_PMC10327660_dr-15-2-9617-g001_0.jpg,drug eruption,Actinic keratosis,"Drug eruption, Drug eruptions & reactions","Actinic solar damage(actinic keratosis), Actinic keratosis",1,0
+qwen3vl_8b_predictions.csv,youtube/ZO_3RM9qssE_frame_26250_1.jpg,exophytic papillary growth,Oral mucositis,,,0,0
+qwen3vl_8b_predictions.csv,edu/Amanda Oakley - Dermatology Made Easy-SCION PUBLISHING (2017)-OCR1_00475_17075.png,"eczema, discoid eczema",Eczema,,Eczema,0,0
+qwen3vl_8b_predictions.csv,youtube/Vrk7360xziM_frame_6521_0.jpg,allergic contact dermatitis,Contact dermatitis,Allergic contact dermatitis,Contact dermatitis,1,0
+qwen3vl_8b_predictions.csv,youtube/OT0JmxCglI4_frame_178469_2.jpg,no definitive diagnosis,Skin lesion,,,0,0
+qwen3vl_8b_predictions.csv,pubmed/8b_be_PMC10195979_gr4a.png,no definitive diagnosis,Surgical incision,,,0,0
+qwen3vl_8b_predictions.csv,youtube/GamzNQ1mnRE_frame_809_0_0.jpg,pyogenic granuloma,Fibroma,Pyogenic granuloma,,1,0
+qwen3vl_8b_predictions.csv,pubmed/f3_be_PMC10868120_12903_2024_3998_Fig1_HTML.png,no definitive diagnosis,Oral candidiasis,,,0,0
+qwen3vl_8b_predictions.csv,public/dermoscopy-00--isic2017-task1--ISIC-0010185--2d-none.png,"melanocytic nevus, nevus",Seborrheic keratosis,,Seborrheic keratosis,0,0
+qwen3vl_8b_predictions.csv,pubmed/18_db_PMC3956789_ad-26-139-g001_2.jpg,striae,abrasion,Striae,,1,0
+qwen3vl_8b_predictions.csv,youtube/N6AUh84mRrI_frame_73721_2.jpg,no definitive diagnosis,Acne vulgaris,,Acne vulgaris,0,0
+qwen3vl_8b_predictions.csv,pubmed/e5_f4_PMC8355434_RCR2_9_e0827_g006_2.png,vasculitis,Koilonychia,,Koilonychia,0,0
+qwen3vl_8b_predictions.csv,youtube/BC-OLAoqCk4_frame_10492_0_0.jpg,"irritated seborrheic keratosis (from ""sk/isk"")",Eczema,"irritated seborrheic keratosis (from ""sk/isk"")",Eczema,1,0
+qwen3vl_8b_predictions.csv,youtube/Xm46eaDAQ9c_frame_328_0_0.jpg,allergic contact dermatitis,Tattoo,Allergic contact dermatitis,,1,0
+qwen3vl_8b_predictions.csv,youtube/7kHm0OypXeI_frame_13724_2.jpg,acral dermatitis,Contact Dermatitis,,Contact dermatitis,0,0
+qwen3vl_8b_predictions.csv,edu/Aimilios Lallas- Zoe Apalla- Elizabeth Lazaridou- Dimitrios Ioannides - Dermatoscopy A-Z-CRC Press (2019)_00025_00174.png,basal cell carcinoma,Eczema,Basal cell carcinoma,Eczema,1,0
+qwen3vl_8b_predictions.csv,"note/Robert Johr, Wilhelm Stolz - Dermoscopy Criteria Review-McGraw-Hill Professional (2019)_00269_01464_0.png",no definitive diagnosis,Acne,,,0,0
+qwen3vl_8b_predictions.csv,youtube/cxnwhiVwGbg_frame_9310_0.jpg,non-melanocytic lesions,Actinic keratosis,,"Actinic solar damage(actinic keratosis), Actinic keratosis",0,0
+qwen3vl_8b_predictions.csv,public/dermoscopy-00--isic2016-task1--ISIC-0000065--2d-none.png,melanoma,Melanocytic nevus,"Malignant melanoma, melanoma",Melanocytic nevus,1,0
+qwen3vl_8b_predictions.csv,IIYI/16689_1.png,cutaneous sporotrichosis,Pyogenic granuloma,,Pyogenic granuloma,0,0
+qwen3vl_8b_predictions.csv,youtube/1O4E-aTIIiY_frame_8576_6.jpg,squamous cell carcinoma,Lip lesion,Squamous cell carcinoma,,1,0
+qwen3vl_8b_predictions.csv,IIYI/23009_1.png,actinic solar damage(solar purpura),bruise,Actinic solar damage(solar purpura),,1,0
+qwen3vl_8b_predictions.csv,pubmed/c0_95_PMC8567499_WJCC_9_9228_g004_0.png,no definitive diagnosis,No visible skin disease,,,0,0
+qwen3vl_8b_predictions.csv,youtube/Sv7YGWDfkQo_frame_9321_0_0.jpg,contact dermatitis,Melanoma,Contact dermatitis,"Malignant melanoma, melanoma",1,0
+qwen3vl_8b_predictions.csv,pubmed/73_ca_PMC4872913_1679-4508-eins-14-1-0025-gf01-pt_2.jpg,no definitive diagnosis,Furuncle,,Furuncle,0,0
+qwen3vl_8b_predictions.csv,pubmed/54_31_PMC3827529_IJD_58_492a_g001.png,"tinea, tinea cruris",Lichen sclerosus,,,0,0
+qwen3vl_8b_predictions.csv,youtube/LuzZ5bAaWDY_frame_3863_2.jpg,squamous cell carcinoma,Unknown,Squamous cell carcinoma,,1,0
+qwen3vl_8b_predictions.csv,youtube/_IxzrKPJdyw_frame_5576_0.jpg,"irritated seborrheic keratosis (from ""sk/isk"")",Post-liposuction itchiness,"irritated seborrheic keratosis (from ""sk/isk"")",,1,0
+qwen3vl_8b_predictions.csv,youtube/KtE0xQG2ceI_frame_6866_6.jpg,allergic contact dermatitis,Acne,Allergic contact dermatitis,,1,0
+qwen3vl_8b_predictions.csv,youtube/ypkfPgxNFms_frame_14666_1.jpg,no definitive diagnosis,Acne,,,0,0
+qwen3vl_8b_predictions.csv,"edu/Dr. Anthony J. Mancini MD  FAAP  FAAD (editor), Dr. Daniel P. Krowchuk MD  FAAP (editor) - Pediatric Dermatology- A Quick Reference Guide-American Academy of Pediatrics (2020)_00381_11401.png",dermatitis,Milia,,Milia,0,0
+qwen3vl_8b_predictions.csv,"edu/Habif, Thomas P. - Clinical Dermatology (5th ed.)  -Elsevier Health Sciences-¨å_2_00017_04888.png",cradle cap,Contact dermatitis,,Contact dermatitis,0,0
+qwen3vl_8b_predictions.csv,youtube/ZfpA_Vc0f60_frame_59_0_0.jpg,contact dermatitis,Actinic cheilitis,Contact dermatitis,,1,0
+qwen3vl_8b_predictions.csv,youtube/wFwNjR0Rogc_frame_132227_0.jpg,no definitive diagnosis,Acne,,,0,0
+qwen3vl_8b_predictions.csv,youtube/fmL_3Mt08GQ_frame_13703_0.jpg,cutaneous t-cell lymphoma (mf),Erythema,,,0,0
+qwen3vl_8b_predictions.csv,"note/Klaus Wolff, Lowell Goldsmith, Stephen Katz, Barbara Gilchrest, Amy Paller, D-¨å_5_00345_16576_1.png",no definitive diagnosis,Rosacea,,Rosacea,0,0
+qwen3vl_8b_predictions.csv,pubmed/6b_ac_PMC5808376_dp0801a14g003_2.png,"lentigo, lentigo maligna",Actinic keratosis,,"Actinic solar damage(actinic keratosis), Actinic keratosis",0,0

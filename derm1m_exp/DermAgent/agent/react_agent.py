@@ -217,8 +217,11 @@ Actions: get_children, get_path, get_siblings, get_parent, search"""
             "query": "Search query (for search action)"
         }
     
-    def run(self, action: str, node: str = "root", query: str = "") -> str:
+    def run(self, action: str, node: str = "root", query: str = "", **kwargs) -> str:
         try:
+            if not query:
+                query = kwargs.get("term") or kwargs.get("search_term") or ""
+
             if action == "get_children":
                 children = self.tree.get_children(node)
                 return json.dumps({
@@ -243,9 +246,14 @@ Actions: get_children, get_path, get_siblings, get_parent, search"""
                 })
             
             elif action == "get_parent":
-                parent = self.tree.parent_map.get(
-                    self.tree.get_canonical_name(node), None
-                )
+                canonical = self.tree.get_canonical_name(node)
+                if canonical is None:
+                    return json.dumps({
+                        "node": node,
+                        "parent": None,
+                        "error": f"Node '{node}' not found in ontology"
+                    })
+                parent = self.tree.parent_map.get(canonical, None)
                 return json.dumps({
                     "node": node,
                     "parent": parent
@@ -273,9 +281,10 @@ Actions: get_children, get_path, get_siblings, get_parent, search"""
 class CompareCandidatesTool(Tool):
     """VLM 기반 동적 후보 질환 비교 도구"""
 
-    def __init__(self, tree: OntologyTree, vlm_model=None):
+    def __init__(self, tree: OntologyTree, vlm_model=None, system_instruction: str = ""):
         self.tree = tree
         self.vlm = vlm_model
+        self.system_instruction = system_instruction.strip()
 
     @property
     def name(self) -> str:
@@ -339,7 +348,8 @@ Returns ranked list of candidates with likelihood scores."""
 
         obs_text = "\n".join(obs_formatted) if obs_formatted else "Not specified"
 
-        prompt = f"""Compare this skin lesion with the following candidate diagnoses.
+        instruction_prefix = f"{self.system_instruction}\n\n" if self.system_instruction else ""
+        prompt = f"""{instruction_prefix}Compare this skin lesion with the following candidate diagnoses.
 
 Candidate Diagnoses:
 {candidates_list}
@@ -474,6 +484,8 @@ class ReActDermatologyAgent:
         self.vlm = vlm_model
         self.max_steps = max_steps
         self.verbose = verbose
+        self.leaf_diseases = sorted([n for n in self.tree.valid_nodes if not self.tree.get_children(n)])
+        self.system_instruction = self._build_system_instruction()
         
         # 프롬프트 로드
         self._init_prompts()
@@ -481,10 +493,34 @@ class ReActDermatologyAgent:
         # 도구 초기화
         self._init_tools()
     
+    def _build_system_instruction(self) -> str:
+        """기본 시스템 프롬프트 구성"""
+        disease_labels_str = ", ".join(self.leaf_diseases)
+        return (
+            "You are a board-certified dermatology expert. You are provided with a skin image and may be asked a question about it. "
+            "Analyze the image carefully and provide a detailed, professional diagnosis or answer. Focus on identifying clinically relevant skin conditions, lesions, or abnormalities. "
+            f"When identifying skin conditions, the disease_label must be chosen from this ontology list: {disease_labels_str}. "
+            "Call out emergent or high-risk findings explicitly (e.g., melanoma, necrotizing infection, Stevens-Johnson syndrome). "
+            "If uncertain, share the top differential diagnoses instead of inventing new labels."
+        )
+    
     def _init_prompts(self):
         """프롬프트 템플릿 초기화"""
+        base_instruction = f"{self.system_instruction}\n\n"
         self.prompts = {
-            "observation": """Analyze this dermatological image carefully.
+            "observation": base_instruction + """Analyze this dermatological image carefully.
+
+IMPORTANT: If there is NO visible skin lesion or disease in the image, respond with:
+{
+    "morphology": ["no visible lesion"],
+    "color": ["not observed"],
+    "distribution": ["not observed"],
+    "surface": ["not observed"],
+    "border": ["not observed"],
+    "location": "not observed",
+    "size": "not observed",
+    "confidence": 0.0
+}
 
 Extract and describe the following clinical features in JSON format:
 {
@@ -498,9 +534,9 @@ Extract and describe the following clinical features in JSON format:
     "confidence": 0.0-1.0
 }
 
-Be specific and use standard dermatological terminology. Output ONLY valid JSON.""",
+Be specific and use standard dermatological terminology. Do NOT leave any list empty; if a feature is not visible, include "not observed" in that list. Output ONLY valid JSON.""",
 
-            "react_system": """You are a dermatology diagnostic agent using systematic reasoning.
+            "react_system": base_instruction + """You are a dermatology diagnostic agent using systematic reasoning.
 
 Available Tools:
 {tools}
@@ -517,15 +553,22 @@ Thought: [Final reasoning]
 Action: conclude
 Action Input: {{"primary_diagnosis": "...", "differential_diagnoses": [...], "confidence": 0.0-1.0}}
 
+IMPORTANT: If no visible skin lesion or disease is found in the image, conclude with:
+Action Input: {{"primary_diagnosis": "no definitive diagnosis", "differential_diagnoses": [], "confidence": 0.0}}
+
 Important Guidelines:
 1. Start by observing the image to gather clinical features
 2. Use the ontology to systematically narrow down categories
 3. Compare candidates when you have specific observations
 4. Verify your diagnosis before concluding
 5. Consider differential diagnoses
-6. Be confident but acknowledge uncertainty""",
+6. Be confident but acknowledge uncertainty
+7. Use ONLY ontology disease labels listed above; do not invent new diagnoses
+8. Call out emergent/high-risk findings and safety advice explicitly
+9. If critical information is missing, ask for clarification before concluding
+10. If no visible lesion is detected, set primary_diagnosis to "no definitive diagnosis" """,
 
-            "category_selection": """Based on these clinical observations:
+            "category_selection": base_instruction + """Based on these clinical observations:
 {observations}
 
 Select the most appropriate category from:
@@ -534,7 +577,7 @@ Select the most appropriate category from:
 Consider the morphology, distribution pattern, and clinical context.
 Output JSON: {{"category": "selected_category", "confidence": 0.0-1.0, "reasoning": "brief explanation"}}""",
 
-            "verification": """Verify if '{diagnosis}' is consistent with this skin image.
+            "verification": base_instruction + """Verify if '{diagnosis}' is consistent with this skin image.
 
 Clinical observations: {observations}
 
@@ -558,7 +601,7 @@ Output JSON:
         self.tools = {
             "observe_image": ObserveTool(self.vlm, self.prompts),
             "navigate_ontology": NavigateOntologyTool(self.tree),
-            "compare_candidates": CompareCandidatesTool(self.tree, self.vlm),
+            "compare_candidates": CompareCandidatesTool(self.tree, self.vlm, self.system_instruction),
             "verify_diagnosis": VerifyDiagnosisTool(self.vlm, self.tree, self.prompts),
         }
     
@@ -571,15 +614,21 @@ Output JSON:
     def _parse_action(self, response: str) -> Tuple[str, Dict]:
         """응답에서 액션 파싱"""
         action_match = re.search(r'Action:\s*(\w+)', response)
-        input_match = re.search(r'Action Input:\s*(\{.*?\})', response, re.DOTALL)
-        
+        # Use GREEDY matching to capture full JSON block
+        input_match = re.search(r'Action Input:\s*(\{.*\})', response, re.DOTALL)
+
         action = action_match.group(1) if action_match else "conclude"
-        
+
         try:
             action_input = json.loads(input_match.group(1)) if input_match else {}
-        except json.JSONDecodeError:
+        except json.JSONDecodeError as e:
+            # Log parsing failure for debugging
+            captured_text = input_match.group(1) if input_match else "No JSON match"
+            if self.verbose:
+                self._log(f"Failed to parse Action Input: {e}", "warning")
+                self._log(f"Captured text: {captured_text[:200]}...", "warning")
             action_input = {}
-        
+
         return action, action_input
     
     def _execute_tool(self, tool_name: str, params: Dict, image_path: str = None) -> str:
@@ -592,10 +641,38 @@ Output JSON:
             return json.dumps({"error": f"Unknown tool: {tool_name}"})
 
         try:
-            # compare_candidates와 verify_diagnosis는 image_path 필요
+            # Add image_path for tools that need it
             if tool_name in ["compare_candidates", "verify_diagnosis"] and image_path:
                 params["image_path"] = image_path
+
+            # Validate required parameters based on tool
+            if tool_name == "navigate_ontology" and "action" not in params:
+                return json.dumps({
+                    "error": f"Missing required parameter 'action' for {tool_name}",
+                    "received_params": list(params.keys()),
+                    "hint": "Expected: action (required), node (optional), query (optional)"
+                })
+
+            if tool_name == "compare_candidates":
+                missing = []
+                if "candidates" not in params:
+                    missing.append("candidates")
+                if "observations" not in params:
+                    missing.append("observations")
+                if missing:
+                    return json.dumps({
+                        "error": f"Missing required parameters for {tool_name}: {missing}",
+                        "received_params": list(params.keys()),
+                        "hint": "Expected: candidates (List[str]), observations (Dict), image_path (optional)"
+                    })
+
             return tool.run(**params)
+        except TypeError as e:
+            # Catch missing parameter errors from function signature
+            return json.dumps({
+                "error": f"Parameter error in {tool_name}: {str(e)}",
+                "received_params": list(params.keys())
+            })
         except Exception as e:
             return json.dumps({"error": str(e)})
     
@@ -718,19 +795,36 @@ Thought:"""
             if action == "observe_image":
                 try:
                     obs_data = json.loads(observation)
+                    if not isinstance(obs_data, dict):
+                        raise ValueError("Observation data is not a dictionary")
+
+                    def _nz_list(val):
+                        return val if val else ["not observed"]
+
                     current_observations = Observation(
-                        morphology=obs_data.get("morphology", []),
-                        color=obs_data.get("color", []),
-                        distribution=obs_data.get("distribution", []),
-                        surface=obs_data.get("surface", []),
-                        border=obs_data.get("border", []),
+                        morphology=_nz_list(obs_data.get("morphology", [])),
+                        color=_nz_list(obs_data.get("color", [])),
+                        distribution=_nz_list(obs_data.get("distribution", [])),
+                        surface=_nz_list(obs_data.get("surface", [])),
+                        border=_nz_list(obs_data.get("border", [])),
                         location=obs_data.get("location", ""),
                         confidence=obs_data.get("confidence", 0.5),
                         raw_text=observation
                     )
                     result.observations = current_observations
-                except json.JSONDecodeError:
-                    pass
+
+                    # Check if no visible lesion was detected
+                    if "no visible lesion" in [m.lower() for m in current_observations.morphology]:
+                        self._log("No visible lesion detected - concluding with no definitive diagnosis", "warning")
+                        result.primary_diagnosis = "no definitive diagnosis"
+                        result.differential_diagnoses = []
+                        result.confidence = 0.0
+                        result.verification_passed = True
+                        break
+
+                except (json.JSONDecodeError, ValueError) as e:
+                    self._log(f"Failed to parse observation: {e}", "warning")
+                    result.warnings.append(f"Failed to parse observation: {e}")
             
             # 히스토리 기록
             try:
@@ -752,23 +846,41 @@ Thought:"""
             if action == "conclude":
                 try:
                     conclusion = json.loads(observation)
+                    if not isinstance(conclusion, dict):
+                        raise ValueError("Conclusion is not a dictionary")
+
                     result.primary_diagnosis = conclusion.get("primary_diagnosis", "")
                     result.differential_diagnoses = conclusion.get("differential_diagnoses", [])
                     result.confidence = conclusion.get("confidence", 0.5)
-                    
+
                     # 유효성 검증
-                    canonical = self.tree.get_canonical_name(result.primary_diagnosis)
-                    if canonical:
-                        result.primary_diagnosis = canonical
-                        result.ontology_path = self.tree.get_path_to_root(canonical)
-                        result.verification_passed = True
+                    if result.primary_diagnosis:
+                        # Special case: "no definitive diagnosis" doesn't need ontology validation
+                        if result.primary_diagnosis.lower() == "no definitive diagnosis":
+                            result.verification_passed = True
+                        else:
+                            canonical = self.tree.get_canonical_name(result.primary_diagnosis)
+                            if canonical:
+                                result.primary_diagnosis = canonical
+                                path = self.tree.get_path_to_root(canonical)
+                                if path:
+                                    result.ontology_path = path
+                                    result.verification_passed = True
+                                else:
+                                    result.warnings.append(f"Could not find path to root for '{canonical}'")
+                                    result.verification_passed = False
+                            else:
+                                result.warnings.append(f"Primary diagnosis '{result.primary_diagnosis}' not found in ontology")
+                                result.verification_passed = False
                     else:
-                        result.warnings.append(f"Primary diagnosis '{result.primary_diagnosis}' not found in ontology")
+                        result.warnings.append("Primary diagnosis is empty")
                         result.verification_passed = False
-                    
-                except json.JSONDecodeError:
-                    result.warnings.append("Failed to parse conclusion")
-                
+
+                except (json.JSONDecodeError, ValueError) as e:
+                    self._log(f"Failed to parse conclusion: {e}", "warning")
+                    result.warnings.append(f"Failed to parse conclusion: {e}")
+                    result.verification_passed = False
+
                 break
         
         self._log(f"\n{'='*60}")
