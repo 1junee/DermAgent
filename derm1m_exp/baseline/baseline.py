@@ -5,6 +5,7 @@ import csv
 import json
 from pathlib import Path
 from tqdm import tqdm
+from typing import Optional
 
 # Add project root to path
 project_root = Path(__file__).resolve().parent.parent.parent
@@ -12,6 +13,25 @@ sys.path.insert(0, str(project_root))
 
 from project_path import SAMPLED_DATA_CSV, OUTPUTS_ROOT, DERM1M_ROOT
 from model import QwenVL, GPT4o, InternVL
+
+
+def load_openai_key(arg_key: Optional[str] = None) -> Optional[str]:
+    """Load OPENAI_API_KEY from arg, env, or project .env."""
+    if arg_key:
+        return arg_key
+    env_key = os.environ.get("OPENAI_API_KEY")
+    if env_key:
+        return env_key
+    env_path = Path(__file__).resolve().parents[2] / ".env"  # /home/work/wonjun/DermAgent/.env
+    if env_path.exists():
+        try:
+            for line in env_path.read_text(encoding="utf-8").splitlines():
+                if line.strip().startswith("OPENAI_API_KEY"):
+                    _, val = line.split("=", 1)
+                    return val.strip().strip('"').strip("'")
+        except Exception:
+            pass
+    return None
 
 
 # class DermDiagnosisModel:
@@ -197,9 +217,10 @@ def main():
             raise ValueError("Model path must be provided for Qwen model.")
         agent = QwenVL(model_path=args.model_path, use_labels_prompt=not args.no_labels_prompt)
     elif args.model == 'gpt':
-        if args.api_key is None:
-            raise ValueError("API key must be provided for GPT model.")
-        agent = GPT4o(api_key=args.api_key, use_labels_prompt=not args.no_labels_prompt)
+        key = load_openai_key(args.api_key)
+        if key is None:
+            raise ValueError("API key must be provided for GPT model (set --api_key or OPENAI_API_KEY or .env).")
+        agent = GPT4o(api_key=key, use_labels_prompt=not args.no_labels_prompt)
     elif args.model == 'internvl':
         if args.model_path is None:
             raise ValueError("Model path must be provided for InternVL model.")
