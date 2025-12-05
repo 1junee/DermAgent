@@ -72,11 +72,11 @@ class DiagnosisStep(Enum):
     FINAL_DIAGNOSIS = "final_diagnosis"
 
 
-# 신뢰도 임계값 상수
-MIN_CATEGORY_CONFIDENCE = 0.4
-MIN_SUBCATEGORY_CONFIDENCE = 0.3
-MIN_DIFFERENTIAL_CONFIDENCE = 0.3
-FALLBACK_CONFIDENCE_FLAG = 0.25
+# 신뢰도 임계값 상수 (낮춤 - 더 많은 진단 허용)
+MIN_CATEGORY_CONFIDENCE = 0.25  # 0.4 → 0.25
+MIN_SUBCATEGORY_CONFIDENCE = 0.2  # 0.3 → 0.2
+MIN_DIFFERENTIAL_CONFIDENCE = 0.2  # 0.3 → 0.2
+FALLBACK_CONFIDENCE_FLAG = 0.15  # 0.25 → 0.15
 
 
 @dataclass
@@ -597,13 +597,23 @@ Provide ONLY the JSON output."""
         state: DiagnosisState = None,
         step: str = "unknown"
     ) -> Tuple[str, bool]:
-        """오버레이 이미지를 포함하여 VLM 호출"""
+        """원본 이미지와 세그멘테이션 오버레이 이미지를 함께 VLM에 전달"""
         if self.vlm is None:
             if state:
                 state.vlm_failures += 1
             raise RuntimeError("VLM 모델이 설정되어 있지 않습니다.")
 
-        full_prompt = f"{self.system_instruction}\n\n{prompt}"
+        # 프롬프트에 두 이미지 설명 추가
+        dual_image_instruction = """You are provided with two images:
+1. **First image**: The original skin image
+2. **Second image**: The same image with the lesion area highlighted by a red overlay (segmentation result)
+
+Use BOTH images for your analysis:
+- The original image shows the true colors and texture of the skin
+- The segmented image helps you focus on the specific lesion area
+
+"""
+        full_prompt = f"{self.system_instruction}\n\n{dual_image_instruction}{prompt}"
 
         # 오버레이 이미지를 임시 파일로 저장
         import tempfile
@@ -613,7 +623,8 @@ Provide ONLY the JSON output."""
                 pil_image.save(tmp.name)
                 overlay_path = tmp.name
 
-            response = self.vlm.chat_img(full_prompt, [overlay_path], max_tokens=1024)
+            # 원본 이미지와 오버레이 이미지 둘 다 전달
+            response = self.vlm.chat_img(full_prompt, [image_path, overlay_path], max_tokens=1024)
 
             # 임시 파일 삭제
             os.unlink(overlay_path)
@@ -624,6 +635,82 @@ Provide ONLY the JSON output."""
                 state.vlm_failures += 1
                 self._record_error(state, step, "VLM_EXCEPTION", str(e))
             return "{}", False
+
+    def _direct_vlm_diagnosis(
+        self,
+        image_path: str,
+        state: DiagnosisState,
+        overlay_image: np.ndarray = None
+    ) -> Tuple[str, float]:
+        """
+        직접 VLM 진단 - 계층적 탐색 실패 시 폴백
+        SAM Baseline과 유사한 방식으로 직접 진단
+        원본 이미지와 세그멘테이션 오버레이 이미지를 함께 분석
+        """
+        self._log("  [Fallback] Direct VLM diagnosis")
+
+        # 질병 라벨 목록 생성
+        disease_labels_str = ", ".join(sorted(self.leaf_diseases)[:100])
+
+        prompt = f"""Analyze the skin condition in these images.
+
+When identifying skin conditions, the disease_label should be one of the following:
+{disease_labels_str}
+
+IMPORTANT: You MUST select a diagnosis from the list above.
+If you cannot identify the exact condition, choose the most likely category or general diagnosis.
+Do NOT return "no definitive diagnosis" unless absolutely necessary.
+
+Provide your response in JSON format:
+{{
+    "disease_label": "diagnosis from the list above",
+    "confidence": 0.0-1.0,
+    "reasoning": "brief explanation"
+}}
+
+Provide ONLY the JSON output."""
+
+        try:
+            if overlay_image is not None:
+                response, success = self._call_vlm_with_overlay(
+                    prompt, image_path, overlay_image, state, "direct_vlm_fallback"
+                )
+            else:
+                response, success = self._call_vlm(prompt, image_path, state, "direct_vlm_fallback")
+
+            if success:
+                parsed = self._parse_json_response(response)
+                disease_label = parsed.get("disease_label", "")
+                confidence = float(parsed.get("confidence", 0.5))
+
+                # 온톨로지에서 검증
+                canonical = self.tree.get_canonical_name(disease_label)
+                if canonical:
+                    return canonical, confidence
+                elif disease_label:
+                    return disease_label, confidence * 0.8  # 온톨로지에 없으면 신뢰도 낮춤
+
+        except Exception as e:
+            self._record_error(state, "direct_vlm_fallback", "FALLBACK_FAILED", str(e))
+
+        return "", 0.0
+
+    def _get_best_candidate_from_scores(self, state: DiagnosisState) -> Tuple[str, float]:
+        """신뢰도 점수에서 가장 높은 후보 반환"""
+        if not state.confidence_scores:
+            return "", 0.0
+
+        # "no definitive diagnosis" 제외하고 최고 점수 찾기
+        valid_scores = {
+            k: v for k, v in state.confidence_scores.items()
+            if k.lower() != "no definitive diagnosis" and self.tree.is_valid_node(k)
+        }
+
+        if valid_scores:
+            best = max(valid_scores.items(), key=lambda x: x[1])
+            return best[0], best[1]
+
+        return "", 0.0
 
     # ============ Step 0: SAM 세그멘테이션 ============
 
@@ -761,10 +848,25 @@ Provide ONLY the JSON output."""
         self._log(f"  Location: {observations.location}")
         self._log(f"  Segmentation quality: {parsed.get('segmentation_quality', 'unknown')}")
 
+        # "no visible lesion" 감지 시 직접 VLM 진단으로 폴백
         if "no visible lesion" in [m.lower() for m in observations.morphology]:
-            self._log("  No visible lesion detected - skipping to final diagnosis")
-            state.final_diagnosis = ["no definitive diagnosis"]
-            state.confidence_scores["no definitive diagnosis"] = 0.0
+            self._log("  No visible lesion detected - trying direct VLM diagnosis")
+
+            # 직접 VLM 진단 시도
+            overlay = state.segmentation.overlay_image if state.segmentation else None
+            fallback_diagnosis, fallback_conf = self._direct_vlm_diagnosis(
+                image_path, state, overlay
+            )
+
+            if fallback_diagnosis:
+                state.final_diagnosis = [fallback_diagnosis]
+                state.confidence_scores[fallback_diagnosis] = fallback_conf
+                state.has_fallback = True
+                self._log(f"  [Fallback] Direct diagnosis: {fallback_diagnosis} (conf: {fallback_conf:.2f})")
+            else:
+                state.final_diagnosis = ["no definitive diagnosis"]
+                state.confidence_scores["no definitive diagnosis"] = 0.0
+
             state.current_step = DiagnosisStep.FINAL_DIAGNOSIS
             return state
 
@@ -789,18 +891,34 @@ Provide ONLY the JSON output."""
             response, success = self._call_vlm(prompt, image_path, state, "category_classification")
 
         if not success:
+            # VLM 호출 실패 시 직접 진단으로 폴백
+            self._log("  [Fallback] Category classification failed - trying direct VLM")
+            overlay = state.segmentation.overlay_image if state.segmentation else None
+            fallback_diag, fallback_conf = self._direct_vlm_diagnosis(image_path, state, overlay)
+            if fallback_diag:
+                state.final_diagnosis.append(fallback_diag)
+                state.confidence_scores[fallback_diag] = fallback_conf
+            else:
+                state.final_diagnosis.append("no definitive diagnosis")
+                state.confidence_scores["no definitive diagnosis"] = FALLBACK_CONFIDENCE_FLAG
             state.has_fallback = True
-            state.final_diagnosis.append("no definitive diagnosis")
-            state.confidence_scores["no definitive diagnosis"] = FALLBACK_CONFIDENCE_FLAG
             state.current_step = DiagnosisStep.FINAL_DIAGNOSIS
             return state
 
         parsed = self._parse_json_response(response)
 
         if not parsed:
+            # 파싱 실패 시 직접 진단으로 폴백
+            self._log("  [Fallback] Response parsing failed - trying direct VLM")
+            overlay = state.segmentation.overlay_image if state.segmentation else None
+            fallback_diag, fallback_conf = self._direct_vlm_diagnosis(image_path, state, overlay)
+            if fallback_diag:
+                state.final_diagnosis.append(fallback_diag)
+                state.confidence_scores[fallback_diag] = fallback_conf
+            else:
+                state.final_diagnosis.append("no definitive diagnosis")
+                state.confidence_scores["no definitive diagnosis"] = FALLBACK_CONFIDENCE_FLAG
             state.has_fallback = True
-            state.final_diagnosis.append("no definitive diagnosis")
-            state.confidence_scores["no definitive diagnosis"] = FALLBACK_CONFIDENCE_FLAG
             state.current_step = DiagnosisStep.FINAL_DIAGNOSIS
             return state
 
@@ -815,10 +933,18 @@ Provide ONLY the JSON output."""
             state.confidence_scores[canonical] = confidence
             self._log(f"  Selected: {canonical} (conf: {confidence:.2f})")
         else:
+            # 카테고리 유효하지 않으면 직접 진단으로 폴백
             self._record_warning(state, "category_classification", f"Invalid category: {selected}")
+            self._log("  [Fallback] Invalid category - trying direct VLM")
+            overlay = state.segmentation.overlay_image if state.segmentation else None
+            fallback_diag, fallback_conf = self._direct_vlm_diagnosis(image_path, state, overlay)
+            if fallback_diag:
+                state.final_diagnosis.append(fallback_diag)
+                state.confidence_scores[fallback_diag] = fallback_conf
+            else:
+                state.final_diagnosis.append("no definitive diagnosis")
+                state.confidence_scores["no definitive diagnosis"] = FALLBACK_CONFIDENCE_FLAG
             state.has_fallback = True
-            state.final_diagnosis.append("no definitive diagnosis")
-            state.confidence_scores["no definitive diagnosis"] = FALLBACK_CONFIDENCE_FLAG
             state.current_step = DiagnosisStep.FINAL_DIAGNOSIS
             return state
 
@@ -981,15 +1107,25 @@ Provide ONLY the JSON output."""
                     state.final_diagnosis.append(canonical)
 
             if not state.final_diagnosis:
+                # confidence_scores에서 최고 점수 후보 찾기
                 sorted_candidates = sorted(state.confidence_scores.items(), key=lambda x: x[1], reverse=True)
                 for candidate, score in sorted_candidates[:3]:
-                    if self.tree.is_valid_node(candidate):
+                    if candidate.lower() != "no definitive diagnosis" and self.tree.is_valid_node(candidate):
                         canonical = self.tree.get_canonical_name(candidate)
                         if canonical and canonical not in state.final_diagnosis:
                             state.final_diagnosis.append(canonical)
 
+            # 여전히 비어있으면 직접 VLM 폴백 시도
             if not state.final_diagnosis:
-                state.final_diagnosis.append("no definitive diagnosis")
+                self._log("  [Fallback] No valid diagnosis - trying direct VLM")
+                overlay = state.segmentation.overlay_image if state.segmentation else None
+                fallback_diag, fallback_conf = self._direct_vlm_diagnosis(image_path, state, overlay)
+                if fallback_diag:
+                    state.final_diagnosis.append(fallback_diag)
+                    state.confidence_scores[fallback_diag] = fallback_conf
+                    state.has_fallback = True
+                else:
+                    state.final_diagnosis.append("no definitive diagnosis")
 
         state.reasoning_history.append({
             "step": "final_diagnosis",
@@ -1020,8 +1156,12 @@ Provide ONLY the JSON output."""
         # Step 1: 초기 평가
         state = self.step_initial_assessment(image_path, state)
 
-        if state.current_step == DiagnosisStep.FINAL_DIAGNOSIS and "no definitive diagnosis" in state.final_diagnosis:
-            self._log("No visible lesion detected - diagnosis complete")
+        # 폴백으로 진단 완료된 경우 (직접 VLM 진단 등)
+        if state.current_step == DiagnosisStep.FINAL_DIAGNOSIS:
+            if state.has_fallback and state.final_diagnosis and state.final_diagnosis[0] != "no definitive diagnosis":
+                self._log("Diagnosis via fallback - skipping hierarchical steps")
+            else:
+                self._log("Early exit - diagnosis complete")
         else:
             # Step 2: 대분류
             state = self.step_category_classification(image_path, state)
@@ -1033,8 +1173,10 @@ Provide ONLY the JSON output."""
                 # Step 4: 감별 진단
                 state = self.step_differential_diagnosis(image_path, state)
 
-            # Step 5: 최종 진단
-            if "no definitive diagnosis" not in state.final_diagnosis:
+                # Step 5: 최종 진단
+                state = self.step_final_diagnosis(image_path, state)
+            elif not state.final_diagnosis or state.final_diagnosis[0] == "no definitive diagnosis":
+                # 폴백이 아직 없으면 최종 진단 단계 실행
                 state = self.step_final_diagnosis(image_path, state)
 
         # 결과 정리

@@ -1015,7 +1015,7 @@ def run_dermatology_agent_sam(
             segmenter_type=segmenter_type,
             segmentation_strategy=segmentation_strategy,
             use_segmentation=True,
-            verbose=False
+            verbose=verbose
         )
     except Exception as e:
         logger.error(f"DermatologyAgentSAM 초기화 실패: {e}")
