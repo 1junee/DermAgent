@@ -34,26 +34,6 @@ def load_openai_key(arg_key: Optional[str] = None) -> Optional[str]:
     return None
 
 
-# class DermDiagnosisModel:
-#     """Wrapper class for dermatology diagnosis models"""
-
-#     def __init__(self, base_model):
-#         self.base_model = base_model
-#         # The base_model already has instruction with disease labels from model.py
-#         # We don't override it, just use structured prompts in analyze_image
-
-#     def analyze_image(self, image_path):
-#         """Analyze a single image and extract disease_label, body_location, and caption"""
-#         prompt = """Please analyze this dermatological image and provide the following information in JSON format:
-
-# {
-#     "disease_label": "The specific skin disease or condition visible in the image (must be from the provided list)",
-#     "body_location": "The body part or location where the condition appears",
-#     "caption": "A detailed description of the skin condition visible in the image"
-# }
-
-# Provide ONLY the JSON output without any additional text."""
-
 class DermDiagnosisModel:
     """Wrapper class for dermatology diagnosis models"""
 

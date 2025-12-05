@@ -14,8 +14,10 @@ from enum import Enum
 from abc import ABC, abstractmethod
 
 # 경로 설정 - eval 폴더의 모듈을 import하기 위해
-SCRIPT_DIR = Path(__file__).parent.parent
-sys.path.insert(0, str(SCRIPT_DIR / "eval"))
+SCRIPT_DIR = Path(__file__).parent
+AGENT_DIR = SCRIPT_DIR.parent  # DermAgent
+DERM1M_EXP_DIR = AGENT_DIR.parent  # derm1m_exp
+sys.path.insert(0, str(DERM1M_EXP_DIR / "eval"))
 
 from ontology_utils import OntologyTree
 
@@ -173,8 +175,7 @@ class DifferentialDiagnosisTool(BaseTool):
             {disease: score} 형태의 딕셔너리
         """
         if self.vlm is None or image_path is None:
-            # VLM 없으면 균등 점수 (모든 후보에 동일 기회)
-            return {candidate: 0.5 for candidate in candidates}
+            raise RuntimeError("VLM 모델과 이미지 경로가 모두 필요합니다.")
 
         # VLM으로 배치 비교
         scores = self._compare_with_vlm_batch(candidates, observations, image_path)
@@ -291,10 +292,15 @@ class DermatologyAgent:
         verbose: bool = True
     ):
         self.tree = OntologyTree(ontology_path)  # None이면 자동 탐색
+        if vlm_model is None:
+            raise ValueError("vlm_model을 지정해야 합니다. 테스트용 모드는 더 이상 지원하지 않습니다.")
         self.vlm = vlm_model
         self.verbose = verbose
         
         # 도구 초기화
+        # 전체 유효 노드 (중간 노드 + 리프 노드 모두 진단으로 사용 가능)
+        self.valid_diseases = sorted(list(self.tree.valid_nodes))
+        # 리프 노드 목록 (참고용)
         self.leaf_diseases = sorted([n for n in self.tree.valid_nodes if not self.tree.get_children(n)])
         self.system_instruction = self._build_system_instruction()
         self.tools = {
@@ -309,14 +315,15 @@ class DermatologyAgent:
         self._load_prompts()
 
     def _build_system_instruction(self) -> str:
-        """기본 시스템 프롬프트 구성 (disease list 제외 - 토큰 최적화)"""
+        """기본 시스템 프롬프트 구성 - 도구 기반 탐색을 위해 라벨 목록 미제공"""
         return (
             "You are a board-certified dermatology expert. You are provided with a skin image and may receive a related question. "
-            "Analyze the image carefully and provide a detailed, professional assessment. Focus on identifying skin conditions, lesions, or abnormalities. "
-            "When identifying skin conditions, choose the disease_label from the provided list of valid diagnoses in the prompt. "
+            "Analyze the image carefully and provide a detailed, professional assessment. "
+            "You have access to tools to navigate a disease ontology tree - use these tools to explore categories and find the appropriate diagnosis. "
+            "Your diagnosis must be a valid node from the ontology tree. Both intermediate categories (e.g., 'eczema', 'fungal') AND specific diseases are valid. "
+            "Choose the most specific level you can confidently identify. "
             "Call out any emergent or high-risk findings explicitly (e.g., melanoma, necrotizing infection, Stevens-Johnson syndrome). "
-            "If uncertain, share the top differentials rather than inventing new labels. "
-            "Always select from the specific options provided in each prompt."
+            "If uncertain, share the top differentials."
         )
     
     def _load_prompts(self):
@@ -324,7 +331,7 @@ class DermatologyAgent:
         self.prompts = {
             "initial_assessment": """Analyze this dermatological image and describe what you observe.
 
-IMPORTANT: If there is NO visible skin lesion or disease in the image, respond with:
+IMPORTANT: If no clear skin lesion is visible, the image does not show identifiable human skin, or you cannot make a confident diagnosis, respond with:
 {
     "morphology": ["no visible lesion"],
     "color": ["not observed"],
@@ -332,7 +339,7 @@ IMPORTANT: If there is NO visible skin lesion or disease in the image, respond w
     "surface": ["not observed"],
     "border": ["not observed"],
     "location": "not observed",
-    "additional_notes": "No definitive skin lesion visible in the image"
+    "additional_notes": "no definitive diagnosis"
 }
 
 Focus on PRIMARY LESION MORPHOLOGY - be VERY specific:
@@ -406,11 +413,11 @@ And the clinical observations:
 Select the most likely specific diagnosis from these candidates:
 {candidates}
 
-IMPORTANT: If the clinical observations indicate "no visible lesion" or if you cannot confidently identify a specific disease, set primary_diagnosis to "no definitive diagnosis".
+IMPORTANT: If no clear skin lesion is visible, the image does not show identifiable human skin, or you cannot make a confident diagnosis, set primary_diagnosis to "no definitive diagnosis".
 
 Respond with JSON:
 {{
-    "primary_diagnosis": "most likely diagnosis (or 'no definitive diagnosis' if lesion is not clear)",
+    "primary_diagnosis": "most likely diagnosis (or 'no definitive diagnosis' if uncertain)",
     "confidence": 0.0-1.0,
     "differential_diagnoses": ["other possible diagnoses in order of likelihood"],
     "reasoning": "clinical reasoning for your diagnosis"
@@ -430,7 +437,7 @@ Provide ONLY the JSON output."""
             if state:
                 state.vlm_failures += 1
                 self._record_error(state, step, "NO_VLM", "VLM model is None")
-            return "{}", False
+            raise RuntimeError("VLM 모델이 설정되어 있지 않습니다.")
 
         full_prompt = f"{self.system_instruction}\n\n{prompt}"
 
@@ -445,14 +452,22 @@ Provide ONLY the JSON output."""
                 print(f"VLM Error: {e}")
             return "{}", False
     
-    def _parse_json_response(self, response: str) -> Dict:
-        """JSON 응답 파싱"""
+    def _parse_json_response(self, response) -> Dict:
+        """JSON 응답 파싱 (None 및 비문자열 타입 처리)"""
+        # None이나 비문자열 타입 처리
+        if response is None:
+            return {}
+        if not isinstance(response, str):
+            response = str(response)
+        if not response.strip():
+            return {}
+
         try:
             # JSON 부분 추출
             json_match = re.search(r'\{[\s\S]*\}', response)
             if json_match:
                 return json.loads(json_match.group())
-        except json.JSONDecodeError:
+        except (json.JSONDecodeError, TypeError):
             pass
         return {}
     
@@ -715,21 +730,29 @@ Provide ONLY the JSON output."""
         response, success = self._call_vlm(prompt, image_path, state, "category_classification")
 
         if not success:
-            self._record_warning(state, "category_classification", "VLM call failed, using fallback")
+            self._record_warning(
+                state,
+                "category_classification",
+                "VLM call failed, setting diagnosis to 'no definitive diagnosis'"
+            )
             state.has_fallback = True
-            state.current_path.append("inflammatory")
-            state.confidence_scores["inflammatory"] = FALLBACK_CONFIDENCE_FLAG
-            state.current_step = DiagnosisStep.SUBCATEGORY_CLASSIFICATION
+            state.final_diagnosis.append("no definitive diagnosis")
+            state.confidence_scores["no definitive diagnosis"] = FALLBACK_CONFIDENCE_FLAG
+            state.current_step = DiagnosisStep.FINAL_DIAGNOSIS
             return state
 
         parsed = self._parse_json_response(response)
 
         if not parsed:
-            self._record_warning(state, "category_classification", "Failed to parse VLM response, using fallback")
+            self._record_warning(
+                state,
+                "category_classification",
+                "Failed to parse VLM response, setting diagnosis to 'no definitive diagnosis'"
+            )
             state.has_fallback = True
-            state.current_path.append("inflammatory")
-            state.confidence_scores["inflammatory"] = FALLBACK_CONFIDENCE_FLAG
-            state.current_step = DiagnosisStep.SUBCATEGORY_CLASSIFICATION
+            state.final_diagnosis.append("no definitive diagnosis")
+            state.confidence_scores["no definitive diagnosis"] = FALLBACK_CONFIDENCE_FLAG
+            state.current_step = DiagnosisStep.FINAL_DIAGNOSIS
             return state
 
         selected = parsed.get("selected_category", "")
@@ -747,24 +770,23 @@ Provide ONLY the JSON output."""
             # Invalid category selected
             self._record_warning(
                 state,
-                "category_classification",
-                f"Invalid category '{selected}', using fallback to 'inflammatory'",
-                {"selected": selected, "valid_categories": self.root_categories}
-            )
-            state.has_fallback = True
-            state.current_path.append("inflammatory")
-            state.confidence_scores["inflammatory"] = FALLBACK_CONFIDENCE_FLAG
-
-        state.current_step = DiagnosisStep.SUBCATEGORY_CLASSIFICATION
+            "category_classification",
+            f"Invalid category '{selected}', setting diagnosis to 'no definitive diagnosis'",
+            {"selected": selected, "valid_categories": self.root_categories}
+        )
+        state.has_fallback = True
+        state.final_diagnosis.append("no definitive diagnosis")
+        state.confidence_scores["no definitive diagnosis"] = FALLBACK_CONFIDENCE_FLAG
+        state.current_step = DiagnosisStep.FINAL_DIAGNOSIS
         state.reasoning_history.append({
             "step": "category_classification",
-            "selected": state.current_path[-1],
-            "confidence": state.confidence_scores.get(state.current_path[-1], confidence),
+            "selected": "no definitive diagnosis",
+            "confidence": state.confidence_scores.get("no definitive diagnosis", confidence),
             "reasoning": parsed.get("reasoning", ""),
             "is_fallback": state.has_fallback
         })
 
-        self._log(f"  Selected category: {state.current_path[-1]} (conf: {state.confidence_scores.get(state.current_path[-1], confidence):.2f})")
+        self._log("  Selected category invalid -> no definitive diagnosis")
 
         return state
     
@@ -867,21 +889,21 @@ Provide ONLY the JSON output."""
             return state
 
         current_node = state.current_path[-1]
-        
+
         # 현재 노드의 자손들을 후보로
         descendants = self.tree.get_all_descendants(current_node)
-        
-        # 리프 노드들만 필터링 (실제 질환)
-        leaf_candidates = [d for d in descendants if not self.tree.get_children(d)]
-        
-        # 현재 노드도 후보에 포함 (리프인 경우)
-        if not self.tree.get_children(current_node):
-            leaf_candidates.append(current_node)
-        
-        if not leaf_candidates:
-            leaf_candidates = [current_node]
-        
-        state.candidates = leaf_candidates[:20]  # 상위 20개만
+
+        # 모든 자손 노드 + 현재 노드 + 탐색 경로(상위 노드)까지 후보에 포함
+        # 중간 노드가 정답일 수도 있으므로 리프에 강제하지 않음
+        all_candidates = set(descendants)
+        all_candidates.update(state.current_path)  # 상위 노드 포함
+        all_candidates.add(current_node)
+
+        if not all_candidates:
+            all_candidates = {current_node}
+
+        # 정렬된 리스트로 변환 후 상위 20개만 사용
+        state.candidates = sorted(all_candidates)[:20]
         
         self._log(f"  Candidates: {len(state.candidates)} diseases")
         
@@ -942,29 +964,38 @@ Provide ONLY the JSON output."""
         differentials = parsed.get("differential_diagnoses", [])
         confidence = parsed.get("confidence", 0.5)
         
-        # 유효성 확인 및 최종 진단 설정
-        canonical_primary = self.tree.get_canonical_name(primary)
-        if canonical_primary:
-            state.final_diagnosis.append(canonical_primary)
-            state.confidence_scores[canonical_primary] = confidence
-        
-        for diff in differentials[:3]:
-            canonical = self.tree.get_canonical_name(diff)
-            if canonical and canonical not in state.final_diagnosis:
-                state.final_diagnosis.append(canonical)
-        
-        # 후보 점수 기반 백업
-        if not state.final_diagnosis:
-            sorted_candidates = sorted(
-                state.confidence_scores.items(),
-                key=lambda x: x[1],
-                reverse=True
-            )
-            for candidate, score in sorted_candidates[:3]:
-                if self.tree.is_valid_node(candidate):
-                    canonical = self.tree.get_canonical_name(candidate)
-                    if canonical and canonical not in state.final_diagnosis:
-                        state.final_diagnosis.append(canonical)
+        # "no definitive diagnosis" 처리
+        if primary and primary.lower() == "no definitive diagnosis":
+            state.final_diagnosis.append("no definitive diagnosis")
+            state.confidence_scores["no definitive diagnosis"] = confidence
+        else:
+            # 유효성 확인 및 최종 진단 설정
+            canonical_primary = self.tree.get_canonical_name(primary)
+            if canonical_primary:
+                state.final_diagnosis.append(canonical_primary)
+                state.confidence_scores[canonical_primary] = confidence
+
+            for diff in differentials[:3]:
+                canonical = self.tree.get_canonical_name(diff)
+                if canonical and canonical not in state.final_diagnosis:
+                    state.final_diagnosis.append(canonical)
+
+            # 후보 점수 기반 백업
+            if not state.final_diagnosis:
+                sorted_candidates = sorted(
+                    state.confidence_scores.items(),
+                    key=lambda x: x[1],
+                    reverse=True
+                )
+                for candidate, score in sorted_candidates[:3]:
+                    if self.tree.is_valid_node(candidate):
+                        canonical = self.tree.get_canonical_name(candidate)
+                        if canonical and canonical not in state.final_diagnosis:
+                            state.final_diagnosis.append(canonical)
+
+            # 여전히 비어있으면 "no definitive diagnosis" 추가
+            if not state.final_diagnosis:
+                state.final_diagnosis.append("no definitive diagnosis")
         
         state.reasoning_history.append({
             "step": "final_diagnosis",
@@ -1092,60 +1123,116 @@ Provide ONLY the JSON output."""
         return results
 
 
-def demo():
-    """데모 (VLM 없이 구조 테스트)"""
-    print("=== Dermatology Agent Demo (without VLM) ===\n")
+def test_structure():
+    """온톨로지 구조 테스트 (VLM 없이)"""
+    print("=" * 60)
+    print("Dermatology Agent - 구조 테스트")
+    print("=" * 60)
 
     try:
-        # VLM 없이 에이전트 생성 (자동 경로)
-        agent = DermatologyAgent(ontology_path=None, vlm_model=None, verbose=True)
-        print(f"✓ Ontology loaded from: {agent.tree.ontology_path}\n")
+        tree = OntologyTree()
+        print(f"\n✓ 온톨로지 로드 완료: {tree.ontology_path}")
+        print(f"  전체 노드 수: {len(tree.valid_nodes)}")
+
+        # 리프 노드와 중간 노드 수 계산
+        leaf_nodes = [n for n in tree.valid_nodes if not tree.get_children(n)]
+        intermediate_nodes = [n for n in tree.valid_nodes if tree.get_children(n)]
+        print(f"  리프 노드 수: {len(leaf_nodes)}")
+        print(f"  중간 노드 수: {len(intermediate_nodes)}")
     except FileNotFoundError as e:
         print(f"Error: {e}")
-        return
-    
-    print("\n[Ontology Navigator Tool Demo]")
-    nav = agent.tools["navigator"]
-    
-    print("\nRoot categories:")
+        return False
+
+    print("\n[Ontology Navigator Tool 테스트]")
+    nav = OntologyNavigator(tree)
+
+    print("\n루트 카테고리:")
     result = nav.execute("get_children", "root")
     for child in result["children"]:
         print(f"  - {child}")
-    
-    print("\nInflammatory subcategories:")
+
+    print("\nInflammatory 하위 카테고리:")
     result = nav.execute("get_children", "inflammatory")
     for child in result["children"]:
         print(f"  - {child}")
-    
-    print("\nFungal diseases:")
-    result = nav.execute("get_children", "fungal")
-    for child in result["children"]:
-        print(f"  - {child}")
-    
-    print("\nPath for 'Tinea corporis':")
+
+    print("\n'Tinea corporis' 경로:")
     result = nav.execute("get_path", "Tinea corporis")
     print(f"  {' → '.join(result['path'])}")
-    
-    print("\n[Differential Diagnosis Tool Demo]")
-    diff_tool = agent.tools["differential"]
-    
-    # 가상의 관찰 결과
-    obs = ObservationResult(
-        morphology=["annular", "scaly", "plaque"],
-        color=["red", "erythematous"],
-        distribution=["localized"],
-        location="trunk",
-        raw_description="circular red scaly patch with raised border"
-    )
-    
-    candidates = ["Tinea corporis", "Psoriasis", "Eczema", "Cellulitis"]
-    scores = diff_tool.execute(candidates, obs)
-    
-    print(f"\nObservations: morphology={obs.morphology}, color={obs.color}")
-    print("Differential diagnosis scores:")
-    for disease, score in scores.items():
-        print(f"  {disease}: {score:.3f}")
+
+    # 중간 노드 검증
+    print("\n[중간 노드 예시] 'eczema' 정보:")
+    eczema_children = nav.execute("get_children", "eczema")
+    print(f"  자식 노드 수: {eczema_children['count']}")
+    print(f"  자식 노드: {eczema_children['children'][:5]}...")
+
+    print("\n✓ 구조 테스트 완료")
+    return True
+
+
+def test_with_vlm(api_key: str, image_path: str):
+    """
+    VLM을 사용한 실제 테스트
+
+    Args:
+        api_key: OpenAI API 키
+        image_path: 테스트 이미지 경로
+
+    Returns:
+        진단 결과 딕셔너리
+    """
+    import sys
+    from pathlib import Path
+    script_dir = Path(__file__).parent.parent
+    sys.path.insert(0, str(script_dir / "experiments"))
+
+    print("=" * 60)
+    print("Dermatology Agent - VLM 테스트")
+    print("=" * 60)
+
+    # VLM 래퍼 임포트
+    try:
+        from vlm_wrapper import GPT4oWrapper
+    except ImportError:
+        from model import GPT4o as GPT4oWrapper
+
+    # VLM 초기화
+    vlm = GPT4oWrapper(api_key=api_key, use_labels_prompt=False)
+    print("VLM 초기화 완료")
+
+    # 에이전트 초기화
+    agent = DermatologyAgent(vlm_model=vlm, verbose=True)
+    print(f"에이전트 초기화 완료 (유효 노드: {len(agent.valid_diseases)}개)")
+
+    # 진단 수행
+    print(f"\n이미지 진단 중: {image_path}")
+    result = agent.diagnose(image_path)
+
+    print(f"\n=== 진단 결과 ===")
+    print(f"최종 진단: {result.get('final_diagnosis', [])}")
+    print(f"진단 경로: {' → '.join(result.get('diagnosis_path', []))}")
+    print(f"고려한 후보: {len(result.get('candidates_considered', []))}개")
+
+    return result
 
 
 if __name__ == "__main__":
-    demo()
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Dermatology Agent 테스트")
+    parser.add_argument("--api_key", type=str, default=None,
+                        help="OpenAI API 키 (없으면 구조 테스트만 실행)")
+    parser.add_argument("--image", type=str, default=None,
+                        help="테스트 이미지 경로")
+
+    args = parser.parse_args()
+
+    # 구조 테스트
+    test_structure()
+
+    # VLM 테스트 (API 키와 이미지가 있는 경우)
+    if args.api_key and args.image:
+        print("\n")
+        test_with_vlm(args.api_key, args.image)
+    elif args.api_key or args.image:
+        print("\n[참고] VLM 테스트를 실행하려면 --api_key와 --image 둘 다 필요합니다.")
